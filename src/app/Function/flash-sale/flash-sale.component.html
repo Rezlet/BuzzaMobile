@@ -1,0 +1,40 @@
+<div [@fadeInOut]>
+  <app-header-back title="Flash Sale" showCart="true"></app-header-back>
+
+  <div class="container">
+    <app-select-change
+      [items]="categories"
+      (newValue)="getValueItems($event)"
+    ></app-select-change>
+    <div class="d-flex gap-2 justify-content-center my-4">
+      <div
+        class="px-11 py-2 text-center bg-black fz-16 text-white fw-bold border-r-10"
+      >
+        <h6 class="fw-700 fz-16">05</h6>
+        <h5 class="fw-500 fz-12" translate="date.Day"></h5>
+      </div>
+      <div
+        class="px-11 py-2 text-center bg-black fz-16 text-white fw-bold border-r-10"
+      >
+        <h6 class="fw-700 fz-16">30</h6>
+        <h5 class="fw-500 fz-12" translate="date.Hour"></h5>
+      </div>
+      <div
+        class="px-11 py-2 text-center bg-black fz-16 text-white fw-bold border-r-10"
+      >
+        <h6 class="fw-700 fz-16">03</h6>
+        <h5 class="fw-500 fz-12" translate="date.Minute"></h5>
+      </div>
+      <div
+        class="px-11 py-2 text-center bg-black fz-16 text-white fw-bold border-r-10"
+      >
+        <h6 class="fw-700 fz-16">03</h6>
+        <h5 class="fw-500 fz-12" translate="date.Second"></h5>
+      </div>
+    </div>
+
+    <div class="d-flex gap-c-2 gap-r-3 mt-3 flex-wrap justify-content-between">
+      <app-food-item *ngFor="let item of items" [item]="item"></app-food-item>
+    </div>
+  </div>
+</div>

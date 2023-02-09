@@ -1,0 +1,95 @@
+<div>
+  <app-header-back></app-header-back>
+
+  <form
+    [formGroup]="userForm"
+    class="container flex-wrap gap-3 d-flex flex-column gap-3"
+    style="min-height: 90vh; width: 100vw"
+    (ngSubmit)="onSubmit()"
+  >
+    <h1 class="fz-36 fw-500 text-default" translate="msg.Create-user-1"></h1>
+
+    <div>
+      <div class="d-flex column gap-1 position-relative mt-4">
+        <input
+          type="text"
+          class="border-grey-half p-3 flex-1 px-20 border-r-15 fz-16 bg-transparent input-form"
+          name="username"
+          id="username"
+          formControlName="username"
+          (keydown)="checkActive($event)"
+        />
+        <label
+          class="d-flex align-items-center fz-12 text-grey position-absolute px-20 input-form-placeholder"
+          for="username"
+          translate="COMMON.NAME"
+        ></label>
+      </div>
+      <div
+        class="text-red px 20 mt-2"
+        translate="err.Create-user-name"
+        *ngIf="f['username'].errors && isSubmit"
+      ></div>
+    </div>
+
+    <div>
+      <div class="d-flex column gap-1 position-relative">
+        <input
+          type="email"
+          class="border-grey-half p-3 flex-1 px-20 border-r-15 fz-16 bg-transparent input-form active"
+          name="numberphone"
+          id="numberphone"
+          [value]="numberPhone"
+          (keydown)="checkActive($event)"
+        />
+        <label
+          class="d-flex align-items-center fz-12 text-grey position-absolute px-20 input-form-placeholder"
+          for="numberphone"
+          translate="COMMON.NUMBER-PHONE"
+        ></label>
+      </div>
+    </div>
+
+    <div>
+      <div class="d-flex column gap-1 position-relative">
+        <input
+          type="email"
+          class="border-grey-half p-3 flex-1 px-20 border-r-15 fz-16 bg-transparent input-form"
+          name="Email"
+          id="Email"
+          formControlName="Email"
+          (keydown)="checkActive($event)"
+        />
+        <label
+          class="d-flex align-items-center fz-12 text-grey position-absolute px-20 input-form-placeholder"
+          for="Email"
+          >Email</label
+        >
+      </div>
+      <div class="px 20 my-2" *ngIf="f['Email'].errors && isSubmit">
+        <div
+          class="text-red"
+          *ngIf="f['Email'].errors['required']"
+          translate="err.Create-user-email-1"
+        ></div>
+        <div
+          class="text-red"
+          *ngIf="f['Email'].errors['email']"
+          translate="err.Create-user-email-2"
+        ></div>
+      </div>
+    </div>
+    <div class="flex-1 mt-5">
+      <div
+        class="text-red px 20 my-2"
+        *ngIf="isErrors"
+        translate="err.Recheck"
+      ></div>
+      <button
+        type="submit"
+        class="button button-yellow w-100 text-center py-3 fw-500 fz-16 mb-5"
+        translate="COMMON.Continue"
+      ></button>
+    </div>
+  </form>
+</div>

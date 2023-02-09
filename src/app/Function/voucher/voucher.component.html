@@ -1,0 +1,15 @@
+<div [@fadeInOut]>
+  <app-header-back [title]="'COMMON.My-voucher' | translate"></app-header-back>
+
+  <app-select-change
+    [items]="StatusVoucher"
+    (newValue)="getValueItems($event)"
+  ></app-select-change>
+
+  <div class="d-flex flex-column container mt-3">
+    <app-voucher-item
+      *ngFor="let voucher of listShows"
+      [item]="voucher"
+    ></app-voucher-item>
+  </div>
+</div>

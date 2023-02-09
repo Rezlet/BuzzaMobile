@@ -1,0 +1,70 @@
+<div [@fadeInOut]>
+  <div [@fadeInOut] class="h-100 index-middle position-relative" #position>
+    <div
+      (click)="back()"
+      style="transform: translate(10px, 10px)"
+      class="cursor-poiter sz-circle-40 position-fixed index-middle top-0 d-flex align-items-center justify-content-center circle-border bg-overlay-light"
+    >
+      <img
+        class="circle-border"
+        src="assets/Images/arrow-left-white.png"
+        alt=""
+      />
+    </div>
+
+    <div
+      style="transform: translate(-10px, 10px); right: 0"
+      class="cursor-poiter sz-circle-40 position-fixed index-middle top-0 d-flex align-items-center justify-content-center circle-border bg-grey-bold"
+    >
+      <img class="circle-border" src="assets/Images/share-2.png" alt="" />
+    </div>
+
+    <img [src]="item ? item.ImageTitle : ''" alt="" class="w-100" />
+    <div
+      [@fadeInOut]
+      style="transform: translateY(-2%)"
+      class="bottom-0 index-top bg-white border-r-32"
+    >
+      <div class="pt-5 containercontainer">
+        <h6
+          class="fz-24 text-center text-default mx-auto"
+          style="width: calc(100vw / 428 * 312)"
+        >
+          {{ item ? item.Title : "" }}
+        </h6>
+
+        <h5 class="text-center text-grey fz-12">
+          {{ lastUpdate ? lastUpdate : "" }}
+        </h5>
+      </div>
+
+      <div [innerHTML]="item ? item.Detail : ''" class="container"></div>
+
+      <div class="mt-5">
+        <h6
+          class="text-default-light fz-16 fw-bold container"
+          translate="COMMON.Other-posts"
+        ></h6>
+        <div class="d-flex flex-column gap-3 container mt-3 py-3">
+          <app-deal-special
+            (click)="moveToTop()"
+            *ngFor="let item of listDeal"
+            [item]="item"
+          ></app-deal-special>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="height: 96px"></div>
+  <div
+    *ngIf="typeButton"
+    class="container py-20 box-shadow mt-4 bg-white position-fixed bottom-0 index-middle"
+  >
+    <div
+      (click)="catchEvent()"
+      class="button button-yellow w-100 fz-16 fw-bold text-center py-3 box-shadow"
+      translate="COMMON.Save-code"
+    ></div>
+  </div>
+</div>

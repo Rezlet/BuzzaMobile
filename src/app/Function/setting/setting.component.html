@@ -1,0 +1,110 @@
+<div [@fadeInOut]>
+  <app-header-back [title]="'COMMON.SETTING' | translate"></app-header-back>
+
+  <div
+    style="height: 80vh"
+    class="container d-flex justify-content-between flex-column"
+  >
+    <div class="d-flex flex-column gap-3 w-100">
+      <div class="d-flex gap-4">
+        <div class="h-100">
+          <img src="assets/Images/bell-slash.svg" alt="" />
+        </div>
+
+        <div
+          class="fz-20 text-default flex-1"
+          translate="COMMON.NOTIFICATIONS"
+        ></div>
+        <div class="">
+          <div class="form-check form-switch">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              role="switch"
+              id="flexSwitchCheckDefault"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="d-flex justify-content-between align-items-center"
+        (click)="toggleLanguage()"
+      >
+        <div class="d-flex gap-4">
+          <div class="h-100">
+            <img src="assets/Images/language.svg" alt="" />
+          </div>
+
+          <div
+            class="fz-20 text-default flex-1"
+            translate="COMMON.Language"
+          ></div>
+        </div>
+
+        <div
+          class="h-100 text-center animation"
+          [ngClass]="{ 'rotate-z-0': isShowLanguage }"
+          style="width: 46px; transform: rotateZ(-90deg)"
+        >
+          <img src="assets/Images/angle-down.svg" alt="" />
+        </div>
+      </div>
+      <div
+        [@ScaleY]
+        *ngIf="isShowLanguage"
+        style="transform-origin: top"
+        class="ps-5 d-flex flex-column gap-2"
+      >
+        <div
+          (click)="translateLanguageTo('vi')"
+          class="d-flex gap-3 align-items-center"
+        >
+          <div class="h-100">
+            <img src="assets/Images/vi.svg" alt="" />
+          </div>
+
+          <h6 class="fz-16 fw-400" translate="COMMON.VI"></h6>
+        </div>
+
+        <div
+          (click)="translateLanguageTo('en')"
+          class="d-flex gap-3 align-items-center"
+        >
+          <div class="h-100">
+            <img src="assets/Images/en.svg" alt="" />
+          </div>
+
+          <h6 class="fz-16 fw-400" translate="COMMON.EN"></h6>
+        </div>
+      </div>
+      <div class="d-flex gap-4">
+        <div class="h-100">
+          <img src="assets/Images/shield-check.svg" alt="" />
+        </div>
+
+        <div
+          class="fz-20 text-default flex-1"
+          translate="COMMON.POLICY-LEGAL"
+        ></div>
+      </div>
+
+      <div class="d-flex gap-4">
+        <div class="h-100">
+          <img src="assets/Images/info-circle.svg" alt="" />
+        </div>
+
+        <div
+          class="fz-20 text-default flex-1"
+          translate="COMMON.ABOUT-US"
+        ></div>
+      </div>
+    </div>
+
+    <button
+      (click)="logout()"
+      class="button button-red pt-2 pb-2"
+      translate="COMMON.LOGGOUT"
+    ></button>
+  </div>
+</div>

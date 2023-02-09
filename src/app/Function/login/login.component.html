@@ -1,0 +1,42 @@
+<div [@fadeInOut]>
+  <app-header-back></app-header-back>
+  <form
+    method="POST"
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+    class="container flex-wrap gap-3 d-flex flex-column gap-3"
+    style="min-height: 90vh; width: 100vw"
+  >
+    <h1 class="fz-36 fw-500 text-default" translate="COMMON.Log-in"></h1>
+    <h6 class="fz-12 text-grey mt-2" translate="msg.Login-1"></h6>
+    <input
+      type="tel"
+      formControlName="numberphone"
+      name="numberphone"
+      id="numberphone"
+      [placeholder]="'COMMON.NUMBER-PHONE' | translate"
+      class="text-default fz-24 border-grey-light-bottom mt-5 px-3 disable-focus hidden-errors bg-transparent"
+    />
+    <div
+      *ngIf="submitted && f['numberphone'].errors"
+      [ngClass]="{ 'text-red': isErrors }"
+      class="text-yellow show-errors"
+    >
+      <div *ngIf="f['numberphone'].errors['required']">
+        {{ 'err.Login-1' | translate }}
+      </div>
+      <div *ngIf="f['numberphone'].errors['pattern']">
+        {{ 'err.Login-2' | translate }}
+      </div>
+      <div>{{ msg }}</div>
+    </div>
+    <div class="flex-1">
+      <button
+        [ngClass]="{ 'button-disable': f['numberphone'].errors }"
+        type="submit"
+        class="button button-yellow button-disable w-100 text-center py-3 fw-500 fz-16 mb-5 mt-5"
+        translate="COMMON.Continue"
+      ></button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,29 @@
+<div
+  [routerLink]="'/introduce-food/' + item.Id"
+  class="d-flex flex-1 justify-content-between shadow-sm border-r-10 bg-white border-r-10"
+  style="height: 125px"
+>
+  <div class="gap-2 p-4 d-flex flex-column">
+    <div class="d-flex gap-2 align-items-center">
+      <div class="h-100">
+        <img src="assets/Images/Buzza small.png" alt="" class="trans-y-10" />
+      </div>
+      <h6 class="fz-14 fw-400 text-grey fw-500 capitalize">{{ item.brand || brandName }}</h6>
+    </div>
+
+    <h5 class="fz-16 fw-500 text-default-light limit-line-2">
+      {{ item.Title }}
+    </h5>
+
+    <h6 class="fz-14 fw-400 text-grey fw-light">{{ lastUpdate }}</h6>
+  </div>
+
+  <div class="h-100">
+    <img
+      [src]="item.ImageTitle"
+      class="h-100 border-r-10 obj-fit-cover"
+      alt=""
+      style="width: 125px"
+    />
+  </div>
+</div>

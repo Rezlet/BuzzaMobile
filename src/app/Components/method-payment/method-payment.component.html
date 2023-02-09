@@ -1,0 +1,142 @@
+<div
+  *ngIf="showPayment"
+  (click)="togglePayment()"
+  class="bg-overlay-light fixed-top w-100 h-100"
+></div>
+
+<form
+  #method="ngForm"
+  [ngClass]="{ show: showPayment }"
+  class="fixed-bottom bg-white border-top-xl animation-bot-to-top scroll-y p-4"
+  style="bottom: 10%; max-height: 50%"
+>
+  <div class="d-flex justify-content-center">
+    <h6 class="fz-16 fw-500 text-default" translate="msg.Confirm-order-7"></h6>
+    <div
+      class="position-absolute"
+      style="top: 0.75rem; right: 2rem"
+      (click)="togglePayment()"
+    >
+      <img src="assets/Images/close-default.png" alt="" />
+    </div>
+  </div>
+  <div class="d-flex flex-column gap-4 my-4">
+    <!-- choice -->
+    <div class="d-flex gap-3 align-items-center">
+      <input
+        class="cancel position-absolute w-80 opacity-0"
+        type="radio"
+        name="method"
+        [ngModel]="methodForm"
+        value="1"
+        id="method"
+      />
+      <div class="sz-16 border-grey-light circle-border"></div>
+      <label for="cod" class="d-flex gap-3 align-items-center">
+        <div class="h-100">
+          <img src="assets/Images/money-bag.svg" alt="" class="sz-circle-28" />
+        </div>
+        <h6 class="text-grey fz-14 fw-400" translate="msg.method-payment-1"></h6
+      ></label>
+    </div>
+
+    <!-- choice -->
+    <div class="d-flex gap-3 align-items-center">
+      <input
+        class="cancel position-absolute w-80 opacity-0"
+        type="radio"
+        name="method"
+        [ngModel]="methodForm"
+        value="2"
+        id="method"
+      />
+      <div class="sz-16 border-grey-light circle-border"></div>
+      <label for="mb" class="d-flex gap-3 align-items-center">
+        <div class="h-100">
+          <!-- <img src="assets/Images/momo-vertical.svg" alt="" class="sz-circle-28" /> -->
+        </div>
+        <h6 class="text-grey fz-14 fw-400" translate="msg.method-payment-2">
+        </h6></label
+      >
+    </div>
+
+    <!-- choice -->
+    <div class="d-flex gap-3 align-items-center">
+      <input
+        class="cancel position-absolute w-80 opacity-0"
+        type="radio"
+        name="method"
+        [ngModel]="methodForm"
+        value="3"
+        id="method"
+      />
+      <div class="sz-16 border-grey-light circle-border"></div>
+      <label for="momo" class="d-flex gap-3 align-items-center">
+        <div class="h-100">
+          <img
+            src="assets/Images/momo-vertical.svg"
+            alt=""
+            class="sz-circle-28"
+          />
+        </div>
+        <h6 class="text-grey fz-14 fw-400" translate="msg.method-payment-3"></h6
+      ></label>
+    </div>
+
+    <!-- choice -->
+    <div class="d-flex gap-3 align-items-center">
+      <input
+        class="cancel position-absolute w-80 opacity-0"
+        type="radio"
+        name="method"
+        [ngModel]="methodForm"
+        value="4"
+        id="method"
+      />
+      <div class="sz-16 border-grey-light circle-border"></div>
+      <label for="zalopay" class="d-flex gap-3 align-items-center">
+        <div class="h-100">
+          <img src="assets/Images/zalopay.svg" alt="" class="sz-circle-28" />
+        </div>
+        <h6 class="text-grey fz-14 fw-400" translate="msg.method-payment-4"></h6
+      ></label>
+    </div>
+
+    <!-- choice -->
+    <div class="d-flex gap-3 align-items-center">
+      <input
+        class="cancel position-absolute w-80 opacity-0"
+        type="radio"
+        name="method"
+        [ngModel]="methodForm"
+        value="5"
+        id="method"
+      />
+      <div class="sz-16 border-grey-light circle-border"></div>
+      <label for="credit-card" class="d-flex gap-3 align-items-center">
+        <div class="h-100">
+          <img
+            src="assets/Images/credit-card.svg"
+            alt=""
+            class="sz-circle-28"
+          />
+        </div>
+        <h6 class="text-grey fz-14 fw-400" translate="msg.method-payment-5"></h6
+      ></label>
+    </div>
+  </div>
+</form>
+<!-- (ngSubmit)="submitToCreateBooking(bookingInfo.value)" -->
+<div
+  [ngClass]="{ show: showPayment }"
+  class="p-20 start-0 bg-white box-shadow index-top mt-3 position-fixed w-100 bottom-0 animation-bot-to-top"
+>
+  <!-- <div class="text-red mb-3" translate="err.Recheck"></div> -->
+
+  <!-- (click)="submitToCreateBooking(bookingInfo.value)" -->
+  <button
+    (click)="submit(method.value)"
+    class="button button-yellow p-3 w-100"
+    translate="COMMON.Confirm"
+  ></button>
+</div>

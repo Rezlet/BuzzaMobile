@@ -1,0 +1,367 @@
+<div [@fadeInOut]>
+  <app-header-back
+    [title]="'COMMON.Confirm-order' | translate"
+  ></app-header-back>
+
+  <div class="d-flex gap-3 container">
+    <div
+      [ngClass]="{ 'border-yellow': selectShipping }"
+      class="border-r-10 border-grey w-50 d-flex flex-column justify-content-center align-items-center py-1 gap-2"
+      (click)="choiceShipping()"
+    >
+      <div class="h-100">
+        <img src="assets/Images/shipper-red.png" alt="" />
+      </div>
+      <h6
+        class="fz-16 fw-500 text-default-light"
+        translate="msg.Confirm-order-1"
+      ></h6>
+    </div>
+
+    <div
+      [ngClass]="{ 'border-yellow': !selectShipping }"
+      (click)="choiceComing()"
+      class="border-r-10 border-grey w-50 d-flex flex-column justify-content-center align-items-center py-1 gap-2"
+    >
+      <div class="h-100">
+        <img src="assets/Images/home-red.png" alt="" />
+      </div>
+      <h6
+        class="fz-16 fw-500 text-default-light"
+        translate="msg.Confirm-order-2"
+      ></h6>
+    </div>
+  </div>
+
+  <!-- option shipper -->
+  <div *ngIf="selectShipping" class="mt-4 container">
+    <div class="d-flex justify-content-between">
+      <h6
+        class="fz-16 fw-bold text-default-light"
+        translate="msg.Confirm-order-3"
+      ></h6>
+      <h5 class="fz-14 fw-500 text-blue" translate="COMMON.Changes"></h5>
+    </div>
+
+    <div class="d-flex gap-2 align-items-center">
+      <div class="h-100">
+        <img
+          src="assets/Images/location-red.png"
+          class="sz-16"
+          style="height: 18px"
+          alt=""
+        />
+      </div>
+
+      <input
+        type="text"
+        name="location"
+        id="location"
+        class="my-2 flex-1 border-r-10 px-2 py-2 border-grey fz-14"
+        [placeholder]="'msg.Confirm-order-4' | translate"
+      />
+    </div>
+  </div>
+
+  <div *ngIf="!selectShipping" class="mt-4 container">
+    <div class="d-flex flex-column">
+      <div class="d-flex gap-3 align-items-start position-relative">
+        <input
+          class="position-absolute top-0 start-0 w-100 h-100 opacity-0 input-restaurant"
+          type="radio"
+          name="address"
+          id="address"
+        />
+
+        <div
+          class="border-grey-bolder circle-border sz-18 confirm-restaurant position-relative"
+        ></div>
+        <div class="d-flex flex-column gap-1">
+          <h5 class="fz-16 text-default fw-500">
+            Buzza Pizza - Trung Tâm Thương Mại NOWZONE
+          </h5>
+          <h6 class="fz-14 text-grey">
+            Tầng 4 Nowzone, 235 Nguyễn Văn Cừ, P. Nguyễn Cư Trinh, Quận 1, TP.
+            HCM
+          </h6>
+        </div>
+      </div>
+
+      <div class="d-flex gap-3 align-items-start position-relative">
+        <input
+          class="position-absolute top-0 start-0 w-100 h-100 opacity-0 input-restaurant"
+          type="radio"
+          name="address"
+          id="address"
+        />
+
+        <div
+          class="border-grey-bolder circle-border sz-18 confirm-restaurant position-relative"
+        ></div>
+        <div class="d-flex flex-column gap-1">
+          <h5 class="fz-16 text-default fw-500">
+            Buzza Pizza -Nguyễn Thị Thập
+          </h5>
+          <h6 class="fz-14 text-grey">
+            Tầng 1, 51 - 53 Nguyễn Thị Thập, P. Tân Hưng, Quận 7, TP. HCM
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4 container">
+    <div class="d-flex justify-content-between">
+      <h6
+        class="fz-16 fw-bold text-default-light"
+        translate="msg.Confirm-order-5"
+      ></h6>
+
+      <div
+        routerLink="/menu-total"
+        class="button button-white d-flex gap-2 px-2 trans-y-10"
+      >
+        + {{ "COMMON.More-dishes" | translate }}
+      </div>
+    </div>
+
+    <!-- border solid top -->
+    <div
+      *ngFor="let item of listItemInOrder"
+      class="d-flex py-3 align-items-center confirm-border-top gap-4"
+    >
+      <div class="h-100">
+        <img src="assets/Images/pen-yellow.svg" alt="" class="trans-y-25" />
+      </div>
+
+      <div class="d-flex gap-3">
+        <div class="h-100">
+          <img src="assets/Images/buzza-circle-red.png" alt="" />
+        </div>
+
+        <div class="d-flex flex-column gap-2 justify-content-center">
+          <h5 class="fz-14 fw-500 text-default-light">{{ item.ItemName }}</h5>
+          <h6 class="fz-14 text-grey">{{ item.ItemSubInfo }}</h6>
+        </div>
+      </div>
+
+      <div class="d-flex gap-1 align-items-center ms-auto">
+        <div class="">
+          <img src="assets/Images/knife-gold.svg" alt="" />
+        </div>
+        <h6 class="fz-16 fw-500 text-default">
+          {{ item.Quantity }}
+        </h6>
+      </div>
+
+      <div class="d-flex flex-column gap-2 align-items-end">
+        <h5 class="fz-16 fw-500 text-red">
+          {{ item.TotalAmount | currencyVN }}
+        </h5>
+        <div class="h-100">
+          <img src="assets/Images/trash-grey.svg" alt="" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <div class="d-flex justify-content-between container pb-3">
+      <h6
+        class="fz-16 fw-bold text-default-light"
+        translate="msg.Confirm-order-6"
+      ></h6>
+    </div>
+
+    <swiper [config]="configCategoriesMenu" class="container pb-3">
+      <ng-template swiperSlide>
+        <div
+          class="p-2 gap-3 shadow d-flex justify-content-between border-r-10 bg-white"
+        >
+          <div class="h-100 align-self-center">
+            <img src="assets/Images/payment-exp-2.png" alt="" />
+          </div>
+
+          <div class="d-flex flex-column justify-content-between">
+            <div class="d-flex flex-column gap-2">
+              <h5 class="fz-16 fw-500 text-default">Rượu Soju Vị Đào 360ml</h5>
+            </div>
+            <div class="d-flex gap-2">
+              <h6 class="fz-16 text-yellow">49,000đ</h6>
+              <h4 class="fz-12 text-grey line-through">58,000đ</h4>
+            </div>
+          </div>
+
+          <div class="d-flex flex-column justify-content-end">
+            <div class="d-flex align-items-center justify-content-center gap-3">
+              <div
+                class="d-flex justify-content-center align-items-center sz-circle-24 circle-border bg-yellow"
+              >
+                <img src="assets/Images/plus.png" alt="" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+
+      <ng-template swiperSlide>
+        <div
+          class="p-2 gap-3 shadow d-flex justify-content-between border-r-10 bg-white"
+        >
+          <div class="h-100 align-self-center">
+            <img src="assets/Images/payment-exp-2.png" alt="" />
+          </div>
+
+          <div class="d-flex flex-column justify-content-between">
+            <div class="d-flex flex-column gap-2">
+              <h5 class="fz-16 fw-500 text-default">Rượu Soju Vị Đào 360ml</h5>
+            </div>
+            <div class="d-flex gap-2">
+              <h6 class="fz-16 text-yellow">49,000đ</h6>
+              <h4 class="fz-12 text-grey line-through">58,000đ</h4>
+            </div>
+          </div>
+
+          <div class="d-flex flex-column justify-content-end">
+            <div class="d-flex align-items-center justify-content-center gap-3">
+              <div
+                class="d-flex justify-content-center align-items-center sz-circle-24 circle-border bg-yellow"
+              >
+                <img src="assets/Images/plus.png" alt="" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </swiper>
+  </div>
+
+  <div class="container py-3 mt-3">
+    <div class="d-flex justify-content-between mb-3">
+      <h6
+        class="fz-16 fw-bold text-default-light"
+        translate="COMMON.Promotion"
+      ></h6>
+      <h5
+        class="fz-14 fw-500 text-blue"
+        translate="COMMON.Choose-another-code"
+      ></h5>
+    </div>
+
+    <app-voucher-item
+      [item]="selectedVoucher"
+      [isSelected]="true"
+    ></app-voucher-item>
+  </div>
+
+  <div class="container py-3 mt-3">
+    <div class="d-flex justify-content-between">
+      <h6
+        class="fz-16 fw-bold text-default-light"
+        translate="msg.Confirm-order-7"
+      ></h6>
+      <h5 class="fz-14 fw-500 text-blue" translate="msg.Confirm-order-8"></h5>
+    </div>
+
+    <div
+      class="px-20 gap-2 box-shadow d-flex align-items-center justify-content-between border-r-20 py-3 mt-3"
+      (click)="togglePayment()"
+    >
+      <div class="d-flex gap-2 align-items-center">
+        <div class="h-100">
+          <img [src]="'assets/Images/' + paymentImage" alt="" />
+        </div>
+
+        <h6
+          class="fz-16 fw-500 text-default"
+          [translate]="'msg.method-payment-' + method"
+        ></h6>
+      </div>
+      <div class="h-100">
+        <img src="assets/Images/angle-right-small.png" alt="" />
+      </div>
+    </div>
+  </div>
+
+  <div class="container py-3 mt-3">
+    <div class="d-flex justify-content-between">
+      <h6
+        class="fz-16 fw-bold text-default-light fw-bold mb-3"
+        translate="COMMON.Note"
+      ></h6>
+    </div>
+
+    <div class="d-flex">
+      <label
+        for="note"
+        class="bg-grey-light border-grey p-3 border-left-5"
+        style="border-right-width: 0"
+      >
+        <img src="assets/Images/note.svg" alt="" />
+      </label>
+
+      <input
+        type="text"
+        name="note"
+        id="note"
+        [placeholder]="'msg.Confirm-order-10' | translate"
+        class="border-grey w-100 px-20 border-right-5"
+      />
+    </div>
+  </div>
+
+  <div class="container d-flex flex-column mt-3 gap-3">
+    <div class="d-flex justify-content-between align-items-center">
+      <h6 class="fz-14 text-grey">{{ "COMMON.Total" | translate }}:</h6>
+      <h5 class="fz-16 text-default-light">{{ totalPrice | currencyVN }}</h5>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center">
+      <h6 class="fz-14 text-grey">
+        {{ "COMMON.Delivery-charges" | translate }}:
+      </h6>
+      <h5 class="fz-16 text-default-light">0 đ</h5>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center">
+      <h6 class="fz-14 text-yellow">Voucher:</h6>
+      <div class="h-100">
+        <img
+          class="trans-y-10"
+          src="assets/Images/question-circle.png"
+          alt=""
+        />
+      </div>
+    </div>
+
+    <div class="w-100" style="border-top: 1px dashed #bfbfbf"></div>
+
+    <div class="d-flex justify-content-between align-items-center">
+      <h6 class="fz-20 text-default">
+        {{ "COMMON.Provisional" | translate }}:
+      </h6>
+      <h5 class="fz-20 text-red">{{ totalPrice | currencyVN }}</h5>
+    </div>
+  </div>
+
+  <div class="p-20 box-shadow mt-4">
+    <div
+      (click)="sendOrder()"
+      class="button button-yellow w-100 fz-16 fw-bold text-center py-3 box-shadow"
+      translate="COMMON.ORDER"
+    ></div>
+  </div>
+</div>
+
+<app-success-layout
+  [title]="'success.order-layout' | translate"
+  [isBooking]="true"
+  [show]="showSuccess"
+  (emit)="catchEmit($event)"
+></app-success-layout>
+
+<app-method-payment
+  [showPayment]="showPayment"
+  (method)="catchMethod($event)"
+  (show)="catchPayment($event)"
+></app-method-payment>

@@ -1,0 +1,173 @@
+<div [@fadeInOut] class="home-content">
+  <div class="home-header py-5 container index-top position-fixed top-0">
+    <div
+      [routerLink]="profileInfo ? '/profile' : '/login'"
+      class="d-flex gap-2 align-items-center"
+    >
+      <div class="h-100">
+        <img
+          [src]="
+            profileInfo.ProfilePicture
+              ? profileInfo.ProfilePicture
+              : 'assets/Images/user-default.svg'
+          "
+          class="sz-40 circle-border"
+          alt=""
+        />
+      </div>
+      <div class="d-flex gap-1 flex-column">
+        <h6 class="fz-14 text-default fw-500 text-dash">
+          {{ profileInfo ? profileInfo.Username : ('COMMON.Log-in' | translate) }}
+        </h6>
+        <div class="d-flex align-items-center gap-1">
+          <h6 class="text-yellow fw-bold fz-16">
+            {{ profileInfo ? currentPoint : "0" }}
+          </h6>
+          <img src="assets/Images/star.png" alt="" class="trans-y-10" />
+        </div>
+      </div>
+    </div>
+
+    <div class="home-header-right">
+      <!-- <div class="home-language">
+        <img
+          src="../../../assets/Images/en.svg"
+          (click)="translateLanguageTo('en')"
+          class="pe-1"
+        />
+        <img
+          src="../../../assets/Images/vi.svg"
+          (click)="translateLanguageTo('vi')"
+        />
+      </div> -->
+      <div
+        (click)="togglePayment()"
+        style="width: 26px"
+        class="h-100 position-relative d-flex justify-content-start"
+      >
+        <img src="assets/Images/bag.png" alt="" />
+        <div
+          *ngIf="currentFoodInCart"
+          style="top: -4px; right: 0"
+          class="position-absolute bg-red fz-14 fw-400 circle-border text-white sz-18 d-flex align-items-center justify-content-center"
+        >
+          {{ currentFoodInCart }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    style="height: 96px"
+    class="home-header-height position-relative index-middle"
+  >
+    <div class="header-circle"></div>
+  </div>
+  <!-- Option -->
+  <div class="container index-middle">
+    <div
+      class="d-flex gap-3 flex-wrap bg-grey-light py-2-5 border-r-15 bg-grey-light px-3 mt-4"
+    >
+      <div class="d-flex flex-column gap-2">
+        <div
+          routerLink="/order"
+          class="d-flex align-items-center justify-content-center px-1 bg-yellow-light border-r-10 sz-64"
+        >
+          <img src="assets/Images/namsan.svg" alt="" />
+        </div>
+        <h6 class="fz-12 text-default text-center fw-light" translate="COMMON.Restaurant"></h6>
+      </div>
+
+      <div class="d-flex flex-column gap-2">
+        <div
+          routerLink="/booking"
+          class="d-flex align-items-center justify-content-center px-1 bg-yellow-light border-r-10 sz-64"
+        >
+          <img src="assets/Images/booking-color.svg" alt="" />
+        </div>
+        <h6 class="fz-12 text-default text-center fw-light" translate="COMMON.Booking"></h6>
+      </div>
+
+      <div class="d-flex flex-column gap-2">
+        <div
+          routerLink="/order"
+          class="d-flex align-items-center justify-content-center px-1 bg-yellow-light border-r-10 sz-64"
+        >
+          <img src="assets/Images/shipper-color.svg" alt="" />
+        </div>
+        <h6 class="fz-12 text-default text-center fw-light" translate="COMMON.ORDER"></h6>
+      </div>
+
+      <div class="d-flex flex-column gap-2">
+        <div
+          routerLink="/input-address"
+          class="d-flex align-items-center justify-content-center px-1 bg-yellow-light border-r-10 sz-64"
+        >
+          <img src="assets/Images/position-color.svg" alt="" />
+        </div>
+        <h6 class="fz-12 text-default text-center fw-light" translate="COMMON.Position"></h6>
+      </div>
+
+      <div class="d-flex flex-column gap-2">
+        <div
+          routerLink="/menu"
+          class="d-flex align-items-center justify-content-center px-1 bg-yellow-light border-r-10 sz-64"
+        >
+          <img src="assets/Images/order-color.svg" alt="" />
+        </div>
+        <h6 class="fz-12 text-default text-center fw-light" translate="COMMON.Menu"></h6>
+      </div>
+
+      <div class="d-flex flex-column gap-2">
+        <div
+          routerLink="/order"
+          class="d-flex align-items-center justify-content-center px-1 bg-yellow-light border-r-10 sz-64"
+        >
+          <img src="assets/Images/voucher-color.svg" alt="" />
+        </div>
+        <h6 class="fz-12 text-default text-center fw-light" translate="COMMON.Voucher"></h6>
+      </div>
+
+      <div class="d-flex flex-column gap-2">
+        <div
+          routerLink="/flash-sale"
+          class="d-flex align-items-center justify-content-center px-1 bg-yellow-light border-r-10 sz-64"
+        >
+          <img src="assets/Images/flash-sale.svg" alt="" />
+        </div>
+        <h6 class="fz-12 text-default text-center fw-light">Flash Sale</h6>
+      </div>
+    </div>
+  </div>
+  <!-- title banner -->
+  <div class="container d-flex flex-column mt-3">
+    <div class="d-flex justify-content-between mb-2">
+      <h5 class="fw-bold fz-20 text-default" translate="msg.home-1"></h5>
+
+      <div routerLink="/menu" class="d-flex align-items-center gap-1">
+        <h6 class="text-yellow fz-16" routerLink="/Menu" translate="COMMON.See-Menu"></h6>
+        <div class="h-100">
+          <img
+            src="assets/Images/angle-right-small-yerlow.png"
+            alt=""
+            class="trans-y-10"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <swiper [config]="configCarousel" class="my-swiper container">
+    <ng-template *ngFor="let item of listCarousel" swiperSlide>
+      <div class="h-100">
+        <img [src]="item.src" class="w-100 border-r-10" alt="" />
+      </div>
+    </ng-template>
+  </swiper>
+
+  <app-slider-news [listNews]="listNews"></app-slider-news>
+  <app-footer isCheck="home"></app-footer>
+</div>
+
+<app-payment-popup
+  [isShow]="showPayment"
+  (emitShow)="getShow($event)"
+></app-payment-popup>

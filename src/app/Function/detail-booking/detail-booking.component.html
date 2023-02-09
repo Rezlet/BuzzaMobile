@@ -1,0 +1,83 @@
+<div [@fadeInOut]>
+  <app-header-back [title]="business.bname"></app-header-back>
+
+  <div class="h-100">
+    <img class="w-100 obj-fit-cover" style="max-height: 156px;" [src]="business.bimg_url" alt="" />
+  </div>
+  <div class="box-shadow py-20 container d-flex justify-content-between mb-2">
+    <h6 class="fz-16 fw-500 text-default limit-line-1">{{business.bname}}</h6>
+  </div>
+
+  <div class="container py-20 d-flex gap-3 align-items-center mt-3 box-shadow">
+    <div class="h-100">
+      <img src="assets/Images/map-mini-exp.png" alt="" />
+    </div>
+
+    <div class="d-flex flex-column gap-3 flex-1">
+      <div class="d-flex gap-3">
+        <div class="h-100">
+          <img src="assets/Images/online.svg" class="trans-y-25" alt="" />
+        </div>
+
+        <h6 class="text-default fz-14 text-default-light fw-light">
+          Mở cửa: <strong>{{business.OpenTime}} - {{business.CloseTime}}</strong>
+        </h6>
+      </div>
+
+      <div class="d-flex gap-3">
+        <div class="h-100 sz-18">
+          <img
+            class="w-100 trans-y-25"
+            src="assets/Images/location-red.svg"
+            alt=""
+          />
+        </div>
+
+        <h6 class="text-default-light fz-12 text-default-light fw-light"> 
+            {{business.badd}}
+        </h6>
+      </div>
+
+      <div class="d-flex justify-content-between">
+        <div class="d-flex gap-3">
+          <div class="h-100 sz-18">
+            <img
+              class="w-100 trans-y-25"
+              src="assets/Images/phone-red.svg"
+              alt=""
+            />
+          </div>
+          <h6 class="fz-16 fw-500 text-default-light">{{business.bphone}}</h6>
+        </div>
+
+        <div class="d-flex gap-3">
+          <div class="h-100 sz-18">
+            <img
+              class="w-100 trans-y-10"
+              src="assets/Images/card-grey.svg"
+              alt=""
+            />
+          </div>
+
+          <div class="h-100 sz-18">
+            <img
+              class="w-100 trans-y-10"
+              src="assets/Images/wifi-grey.svg"
+              alt=""
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-5 w-100 d-flex justify-content-center">
+    <div (click)="toggleShowBooking()" class="button button-yellow w-50 fz-16 fw-500 py-3 text-center" translate="COMMON.Booking-now">
+  
+    </div>
+  </div>
+</div>
+
+
+
+<app-booking-layout [showBooking]="showBooking" [item]="business" (emit)="getShowBooking($event)"></app-booking-layout>

@@ -1,0 +1,41 @@
+<div
+  class="border-r-10 position-relative shadow-voucher p-3 d-flex hover-to-border-yellow bg-white"
+  style="gap: 30px"
+  [routerLink]="'/detail-voucher/' + item.Id"
+>
+  <div class="h-100 ticket-voucher">
+    <img
+      style="height: 100px; width: 100px"
+      [src]="item.ImageTitle"
+      [ngClass]="{
+        'filter-grey': !item.using
+      }"
+      alt=""
+    />
+  </div>
+
+  <div
+    routerLinkActive="router-link-active"
+    class="d-flex flex-column justify-content-between"
+    style="height: 100px"
+  >
+    <div class="d-flex flex-column gap-1">
+      <div class="fz-16 fw-500 text-default-light pr-3 limit-line-2">
+        {{ item.Title }}
+      </div>
+      <div class="fz-14 fw-400 text-red">{{ item.Content }}</div>
+    </div>
+
+    <div
+      class="fz-16 text-grey justify-self-end"
+      [ngClass]="{
+        'text-danger': item.status == 'danger',
+        'text-warning': item.status == 'warning',
+        'text-grey': item.status == 'good'
+      }"
+    >
+      {{ item.dayOfDate }}
+    </div>
+  </div>
+  <!-- POPUP QR -->
+</div>

@@ -1,0 +1,96 @@
+<div
+  class="container-mobile d-flex py-4 justify-content-between align-items-end position-fixed top-0 index-middle"
+  style="height: 96px; width: 100vw; background-color: #f5f5f7"
+>
+  <div
+    [ngClass]="{ 'flex-1': position === 'between' }"
+    (click)="back()"
+    class="h-100 cursor-poiter pr-3 align-items-end mb-1 d-flex"
+    *ngIf="showBack"
+  >
+    <img class="circle-border" src="assets/Images/arrow-left.svg" alt="" />
+  </div>
+
+  <div class="">
+    <h6
+      class="fz-16 fw-500 text-default text-center limit-line-1 capitalize"
+      [ngClass]="'fz-' + fz"
+    >
+      {{ title }}
+    </h6>
+  </div>
+  <!-- Show cart -->
+
+  <div
+    *ngIf="showCart == false && showBooking == false && showShare == false"
+    [ngClass]="{ 'ml-auto': showCart }"
+    (click)="togglePayment()"
+    class="flex-1 text-end"
+  ></div>
+  <div
+    *ngIf="showCart"
+    [ngClass]="{ 'ml-auto': showCart }"
+    (click)="togglePayment()"
+    class="flex-1 text-end d-flex justify-content-end"
+  >
+    <div
+      style="width: 26px"
+      class="h-100 position-relative d-flex justify-content-start"
+    >
+      <img src="assets/Images/bag.png" alt="" />
+      <div
+        *ngIf="currentFoodInCart"
+        style="top: -4px; right: 0"
+        class="position-absolute bg-red fz-14 fw-400 circle-border text-white sz-18 d-flex align-items-center justify-content-center"
+      >
+        {{ currentFoodInCart }}
+      </div>
+    </div>
+  </div>
+  <!-- Show booking -->
+  <div
+    *ngIf="showBooking"
+    [ngClass]="{ 'ml-auto': showBooking }"
+    class="flex-1 text-end"
+    routerLink="/booking"
+  >
+    <!-- <div *ngIf="showBooking" class="h-100 position-relative">
+      <img src="assets/Images/calendar-grey.png" alt="" />
+    </div> -->
+  </div>
+
+  <div
+    *ngIf="showShare"
+    [ngClass]="{ 'ml-auto': showShare }"
+    class="flex-1 text-end"
+  >
+    <div *ngIf="showShare" class="h-100 position-relative">
+      <img src="assets/Images/share.png" alt="" />
+    </div>
+  </div>
+</div>
+
+<div style="height: 96px" class="mb-1"></div>
+
+<!-- location -->
+<!-- <div routerLink="/input-address" class="mb-2 mx-5">
+  <div *ngIf="showLocation" class="gap-2 d-flex align-items-center">
+    <div class="h-100">
+      <img src="assets/Images/location-pin.png" alt="" />
+    </div>
+
+    <h6 class="fw-500 text-default fz-10">3G7 Đường 22</h6>
+    <div class="h-100">
+      <img
+        class="trans-y-10"
+        src="assets/Images/angle-right-small.png"
+        alt=""
+      />
+    </div>
+  </div>
+</div> -->
+
+<app-payment-popup
+  [isShow]="showPayment"
+  (emitShow)="getShow($event)"
+></app-payment-popup>

@@ -1,0 +1,28 @@
+<div [@fadeInOut]>
+  <app-header-back
+    [title]="'COMMON.SELECT-BRAND' | translate"
+  ></app-header-back>
+
+  <div class="container">
+ 
+    <div>
+      <div
+        *ngFor="let item of listBrands"
+        [routerLink]="'/select-restaurant/' + item.BrandID"
+        [ngStyle]="{ 'background-image': 'url(' + item.BrandImage + ')' }"
+        class="bg-img-css position-relative border-left-10 border-right-10 my-2"
+      >
+        <div
+          style="height: 142px"
+          class="w-25 bg-overlay d-flex justify-content-center align-items-center border-left-10"
+        >
+          <div class="h-100 d-flex justify-content-center align-items-center">
+            <img style="height: 30px;" [src]="item.BrandLogo" alt="" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-footer isCheck="order"></app-footer>
+</div>

@@ -1,0 +1,146 @@
+<div [@fadeInOut]>
+  <app-header-back title="Rewards"></app-header-back>
+
+  <div class="">
+    <div class="container d-flex justify-content-between align-items-center">
+      <h6 class="fz-16 fw-500 text-default" translate="msg.Your-Total-Point"></h6>
+      <div class="d-flex gap-2 align-items-center">
+        <div class="h-100">
+          <img src="assets/Images/big-star.png" alt="" class="trans-y-10" />
+        </div>
+
+        <h5 class="text-yellow fz-30 fw-500">{{score}}</h5>
+      </div>
+    </div>
+
+    <div class="text-center my-3 container">
+      <h6 class="text-yellow fz-16 fw-500" translate="msg.Reward-1"></h6>
+    </div>
+
+    <div class="d-flex flex-column gap-4">
+      <div class="container">
+        <h6 class="fz-16 text-default fw-500">Chính sách điểm 2022</h6>
+
+        <div class="d-flex flex-column gap-1">
+          <h6 class="text-danger fz-16">*Áp dụng tại cửa hàng</h6>
+          <h5 class="fz-20 fw-500 text-default">
+            MỜI BẠN THÂN 10% TOÀN BỘ HÓA ĐƠN
+          </h5>
+        </div>
+
+        <div>
+          <h5 class="fz-16 text-default text-grey fw-light">
+            <strong>MUA MANG VỀ: </strong>Mua 1 tặng 1 khi mua mang đi hoặc đặt
+            giao hàng
+          </h5>
+          <ul class="fz-16 text-default mt-2 pl-1">
+            <li class="fz-16 text-grey">
+              - Ưu đãi áp dụng tặng pizza nhóm classic khi mua 1 pizza bất kì.
+              Hoặc tặng pasta khi mua 1 pasta.
+            </li>
+            <li class="fz-16 text-grey">
+              - Món tặng bằng hoặc thấp hơn giá món mua..
+            </li>
+            <li class="fz-16 text-grey">
+              - Ưu đãi khi gọi kèm 1 nước ngọt/ món mua..
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h5 class="fz-16 text-default text-grey fw-light">
+            <strong>LƯU Ý CHƯƠNG TRÌNH</strong>
+          </h5>
+          <ul class="fz-16 text-default mt-2 pl-1">
+            <li class="fz-16 text-grey">
+              - Không áp dụng lễ/tết theo thông báo của nhà hàng
+            </li>
+            <li class="fz-16 text-grey">
+              - Không áp dụng cùng các CTKM khác/tách bill/ tách bàn.
+            </li>
+          </ul>
+        </div>
+
+        <div class="text-center my-4">
+          <h6 class="text-yellow fz-16 fw-500">Đổi điểm</h6>
+        </div>
+
+        <div class="d-flex justify-content-between">
+          <h6 class="text-default fz-16">Mở khóa thẻ Vàng</h6>
+          <div class="d-flex gap-3">
+            <div class="h-100">
+              <img src="assets/Images/facebook.png" alt="" />
+            </div>
+            <div class="h-100">
+              <img src="assets/Images/instagram.png" alt="" />
+            </div>
+            <div class="h-100">
+              <img src="assets/Images/twitter.png" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="d-flex justify-content-between bg-rewards flex-wrap mb-4 container"
+      >
+        <div class="d-flex justify-content-between w-100 p-4 index-middle">
+          <div class="h-100">
+            <img src="assets/Images/achive-siver.png" alt="" />
+            <h6 class="fz-16 text-default fw-500 text-center">Bạc 2</h6>
+          </div>
+
+          <div class="fz-12 text-default">
+            Đạt {{ score }}/{{ target }} điểm để mở khóa thẻ vàng
+          </div>
+        </div>
+
+        <div class="rating-rewards w-100">
+          <div class="h-100 index-2 trans-y-25 index-middle">
+            <img src="assets/Images/rewards-profile.png" alt="" />
+          </div>
+
+          <div class="h-100 index-2 trans-y-25 index-middle">
+            <img src="assets/Images/rewards-brozon.png" alt="" />
+          </div>
+
+          <div class="h-100 index-2 trans-y-50 index-middle">
+            <img src="assets/Images/rewards-silver.png" alt="" />
+          </div>
+
+          <div class="h-100 index-2 trans-y-25 index-middle">
+            <img src="assets/Images/rewards-golden.png" alt="" />
+          </div>
+
+          <div class="h-100 index-2 trans-y-25 index-middle">
+            <img src="assets/Images/rewards-final.png" alt="" />
+          </div>
+
+          <!-- add data here -->
+          <div
+            [style.width]="(score / target) * 100 + '%'"
+            class="percent-rewards"
+          ></div>
+        </div>
+      </div>
+      <!-- categories -->
+      <swiper [config]="config" class="my-swiper py-5">
+        <ng-template *ngFor="let item of listReward" swiperSlide>
+          <div class="box-shadow p-4 border-r-10">
+            <div class="h-100 rewards-birth">
+              <img src="assets/Images/rewards-birth.png" alt="" />
+            </div>
+
+            <h5 class="text-default-light fz-14 text-center mt-3">
+              {{ item.title }}
+            </h5>
+
+            <h6 class="fz-12 text-grey text-center mt-2">
+              {{ item.content }}
+            </h6>
+          </div>
+        </ng-template>
+      </swiper>
+    </div>
+  </div>
+</div>

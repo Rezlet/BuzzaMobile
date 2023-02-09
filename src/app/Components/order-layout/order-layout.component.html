@@ -1,0 +1,117 @@
+<div
+  [ngClass]="{ show: showFoodItem }"
+  class="fixed-bottom pt-4-5 w-100 bg-white index-top border-top-xl animation-bot-to-top scroll-y max-h-95 h-80"
+  style="bottom: 82px"
+>
+  <form class="d-flex flex-column gap-1" action="POST">
+    <div class="px-4-5 pb-4">
+      <div class="h-100">
+        <img
+          [src]="item.itemimg_url ? item.itemimg_url : item.ItemUrlImage"
+          class="w-100 border-r-32 bg-white"
+          alt=""
+        />
+      </div>
+
+      <h6 class="text-default fz-20 fw-bold mt-3">
+        {{ item.itemname ? item.itemname : item.ItemName }}
+      </h6>
+      <h5 class="fz-16 fw-400 text-grey">{{ item.description }}</h5>
+      <h6 class="mt-3 fz-20 text-red m-mt-2">
+        {{
+          item.itemprice
+            ? (item.itemprice | currencyVN)
+            : (item.TotalAmount | currencyVN)
+        }}
+      </h6>
+      <!-- Nếu set menu bằng rỗng hoặc không tồn tại thì k hiện lên -->
+      <div *ngIf="setMenu2 ? !(setMenu2.length == 0) : false" class="mt-3">
+        <h5
+          class="text-default fz-14 fw-500"
+          translate="msg.order-layout-3"
+        ></h5>
+        <div
+          class="d-flex position-relative align-items-center mt-2 flex-wrap"
+          style="column-gap: 8px; row-gap: 16px"
+        >
+          <!-- selection topping -->
+          <div *ngFor="let menuItem of setMenu2" class="position-relative">
+            <input
+              type="checkbox"
+              name="topping"
+              [value]="menuItem.PIT_ITEMNO"
+              [id]="menuItem.PIT_ITEMNO"
+              (change)="getSetValue($event)"
+              class="bg-red position-absolute w-100 h-100 start-0 top-0 opacity-0 food-item-checkbox"
+            />
+            <label
+              class="border-grey-bold border-r-32 py-2 px-3 fz-14 text-grey m-fz-12"
+            >
+              {{ menuItem.PIT_NAME }}:
+              {{ menuItem.RECS_AMOUNT_PERCENT | currencyVN }}
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-r-10 border-grey py-2 px-3 mt-3 d-flex">
+        <label for="note" class="h-100"
+          ><img src="assets/Images/note.svg" alt=""
+        /></label>
+        <input
+          (change)="getNote($event)"
+          class="border-none text-grey ms-3 fz-14 flex-1"
+          style="outline: none !important"
+          [placeholder]="'msg.order-layout-1' | translate"
+          type="text"
+          name="note"
+          id="note"
+        />
+      </div>
+    </div>
+  </form>
+</div>
+<div
+  [ngClass]="{ show: showFoodItem }"
+  class="bg-white py-3 px-5 bottom-0 start-0 w-100 justify-content-between d-flex box-shadow mt-3 animation-bot-to-top position-fixed bottom-0 index-top"
+>
+  <div class="d-flex align-items-center justify-content-center gap-3 flex-2">
+    <div
+      [ngClass]="{ ' border-yellow': Amount > 0 }"
+      (click)="decreaseAmount()"
+      class="d-flex justify-content-center align-items-center sz-circle-32 circle-border"
+    >
+      <img *ngIf="Amount > 0" src="assets/Images/decrease.png" alt="" />
+    </div>
+
+    <div class="">{{ Amount }}</div>
+
+    <div
+      *ngIf="Amount < 25"
+      (click)="increaseAmount()"
+      class="d-flex justify-content-center align-items-center sz-circle-32 circle-border bg-yellow"
+    >
+      <img src="assets/Images/plus.png" alt="" />
+    </div>
+  </div>
+
+  <div
+    (click)="addCart()"
+    class="button button-yellow fz-16 m-fz-12 fw-bold text-white py-3 px-4"
+  >
+    {{ priceToShow | currencyVN }} - {{ "msg.order-layout-2" | translate }}
+  </div>
+</div>
+
+<div
+  (click)="toggleShowFoodItem()"
+  *ngIf="showFoodItem"
+  class="bg-overlay-lighter position-fixed top-0 start-0 w-100 h-100 index-middle flex-3"
+></div>
+
+<app-success-layout
+  [title]="'success.order-layout' | translate"
+  [isBooking]="true"
+  [show]="showSuccess"
+  (emit)="catchEmit($event)"
+></app-success-layout>

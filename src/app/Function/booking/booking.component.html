@@ -1,0 +1,14 @@
+<!-- kiếm trang booking thì qua booking now -->
+<div [@fadeInOut]>
+  <app-header-back [title]="'BOOKING.SELECT-RESTAURANT' | translate"></app-header-back>
+
+  <div class="container">
+    <app-select-change [items]="categories" (newValue)="getValueItems($event)"></app-select-change>
+  
+    <div class="d-flex flex-column mt-4 gap-3">
+      <app-restaurant-item  *ngFor="let item of items" [item]="item" [brandName]="brandName" [brandID]="brandID"></app-restaurant-item>
+    </div>
+  </div>
+  
+  <app-footer isCheck="booking"></app-footer>
+</div>

@@ -1,0 +1,9 @@
+<div [@fadeInOut]>
+   <app-header-back [title]="'COMMON.Favorite-food' | translate"></app-header-back>
+   
+   <div class="d-flex flex-wrap justify-content-center gap-c-2 gap-r-3 container">
+      <!-- <app-food-item-special *ngFor="let item of listFavourites" [item]="item"></app-food-item-special> -->
+      <app-food-item  *ngFor="let item of listFavourites" [item]="item"></app-food-item>
+   </div>
+
+</div>

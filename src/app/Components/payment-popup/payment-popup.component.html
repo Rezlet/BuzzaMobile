@@ -1,0 +1,132 @@
+<div
+  [ngClass]="{ show: isShow }"
+  class="fixed-bottom w-100 bg-white index-top border-top-xl pt-4-5 pb-4 animation-bot-to-top scroll-y min-h-50 max-h-75"
+  style="padding-bottom: 180px; z-index: 1031"
+  [ngStyle]="{ bottom: hasItems ? '9%' : '0' }"
+>
+  <div
+    class="position-absolute"
+    style="top: 1rem; right: 2rem"
+    (click)="toggleShowPayment()"
+  >
+    <img src="assets/Images/close-default.png" alt="" />
+  </div>
+  <div
+    class="d-flex align-items-center justify-content-center flex-column gap-4"
+    style="transform: translateY(100%)"
+    *ngIf="!hasItems"
+  >
+    <div class="h-100">
+      <img src="assets/Images/empty-cart.png" alt="" />
+    </div>
+
+    <div class="button py-2-5 px-5 button-yellow border-r-32">
+      <p class="text-white fz-16 fw-500" translate="msg.payment-popup-1"></p>
+    </div>
+  </div>
+
+  <div *ngIf="hasItems">
+    <div class="mt-4">
+      <div
+        *ngFor="let item of listItemInOrder"
+        class="d-flex justify-content-between border-r-10 py-2-5 px-4 animation-payment-delete"
+      >
+        <!-- dùng để fit content lại -->
+        <div
+          class="d-flex justify-content-between border-r-10 shadow-sm py-4 ps-4 gap-3"
+          style="width: -webkit-fill-available; min-width: calc(100vw - 48px)"
+        >
+          <div class="h-100 align-self-center">
+            <img
+              [src]="item.ItemUrlImage"
+              style="width: 100px; height: 100px"
+              class="border-r-10"
+              alt=""
+            />
+          </div>
+
+          <div class="d-flex flex-column justify-content-between">
+            <div class="d-flex flex-column gap-2">
+              <h5 class="fz-16 fw-500 text-default m-fz-12">
+                {{ item.ItemName }}
+              </h5>
+              <h6 class="fz-14 text-default-light m-fz-12 limit-line-2">
+                {{ item.ItemSubInfo }}
+              </h6>
+            </div>
+
+            <h4 class="fz-18 text-default">
+              {{ item.TotalAmount | currencyVN }}
+            </h4>
+          </div>
+
+          <div class="d-flex flex-column justify-content-between pe-4">
+            <div class="text-end">
+              <!-- (click)="toggleEditing(item)" -->
+              <!-- <img src="assets/Images/pen.png" alt="" /> -->
+            </div>
+
+            <div class="d-flex align-items-center justify-content-center gap-3">
+              <div
+                *ngIf="item.Quantity != 0"
+                (click)="decrease(item)"
+                class="d-flex justify-content-center align-items-center sz-circle-24 circle-border border-yellow"
+              >
+                <img src="assets/Images/decrease.png" alt="" />
+              </div>
+
+              <div class="">{{ item.Quantity }}</div>
+
+              <div
+                (click)="increase(item)"
+                *ngIf="item.Quantity < 25"
+                class="d-flex justify-content-center align-items-center sz-circle-24 circle-border bg-yellow"
+              >
+                <img src="assets/Images/plus.png" alt="" />
+              </div>
+            </div>
+          </div>
+          <!-- <app-order-layout
+            [item]="item"
+            [showFoodItem]="item.IsEditing"
+          ></app-order-layout> -->
+        </div>
+
+        <div class="trash border-r-10 shadow-sm">
+          <div
+            class="h-100 d-flex justify-content-center align-items-center"
+            style="width: calc(100vw * 87.6 / 428)"
+          >
+            <img src="assets/Images/trash-red.svg" alt="" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  [ngClass]="{ show: isShow }"
+  class="position-fixed index-top bg-white py-3 px-4 start-0 justify-content-between d-flex box-shadow gap-4 animation-bot-to-top"
+  style="width: 100vw; bottom: 0; z-index: 1031"
+  *ngIf="hasItems"
+>
+  <div class="d-flex flex-column gap-2">
+    <h6 class="fz-14 text-default" translate="COMMON.Provisional"></h6>
+    <h5 class="fz-20 text-red">{{ totalPrice | currencyVN }}</h5>
+  </div>
+
+  <div
+    routerLink="/confirm-order"
+    class="flex-1 d-flex justify-content-center button button-yellow align-items-center"
+    (click)="toggleShowPayment()"
+  >
+    <h6 class="fz-16 fw-700 text-white" translate="COMMON.Payment"></h6>
+  </div>
+</div>
+
+<div
+  *ngIf="isShow"
+  (click)="toggleShowPayment()"
+  class="bg-overlay-lighter position-fixed top-0 start-0 w-100 h-100 index-top"
+></div>

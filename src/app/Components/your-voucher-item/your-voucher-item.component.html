@@ -1,0 +1,59 @@
+<div
+  [@fadeInOut]
+  *ngIf="!isHorizontal"
+  routerLink="/detail-voucher"
+  class="col text-center border-r-10 shadow-sm pb-3 bg-white"
+>
+  <div class="h-100">
+    <img [src]="item.src" class="border-r-10 w-100" alt="" />
+  </div>
+
+  <div
+    class="d-flex flex-column text-center justify-content-center align-items-center w-100 px-3 mt-2"
+  >
+    <h6 class="text-grey fw-bold fz-12">{{ item.brand }}</h6>
+    <h5 class="text-default fz-14 mt-2 fw-400">{{ item.title }}</h5>
+  </div>
+
+  <div
+    class="gap-1 border-r-32 bg-yellow-light align-items-center px-2 mt-2"
+    style="height: 20px; display: inline-flex"
+  >
+    <h5 class="text-yellow fw-500 fz-14" style="transform: translateY(10%)">
+      {{ item.required }}
+    </h5>
+    <div class="h-100 d-flex align-items-center">
+      <img src="assets/Images/star.png" alt="" class="trans-y-10" />
+    </div>
+  </div>
+</div>
+
+<div
+  [@fadeInOut]
+  *ngIf="isHorizontal"
+  routerLink="/detail-voucher"
+  class="d-flex gap-3 justify-content-between box-shadow p-3 bg-white border-r-10"
+>
+  <div class="h-100">
+    <img [src]="item.src" alt="" class="border-r-10" />
+  </div>
+
+  <div class="d-flex flex-column gap-2">
+    <h6 class="fz-14 fw-700 text-grey">{{ item.brand }}</h6>
+    <h5 class="text-default fz-16 limit-line-2">
+      {{ item.title }}
+    </h5>
+  </div>
+
+  <div
+    class="gap-1 border-r-32 bg-yellow-light align-items-center px-2 mt-2"
+    style="height: 20px; display: inline-flex"
+  >
+    <h5 class="text-yellow fw-500 fz-14" style="transform: translateY(10%)">
+      {{ item.required }}
+    </h5>
+    <div class="h-100 d-flex align-items-center">
+      <img src="assets/Images/star.png" alt="" class="trans-y-10" />
+    </div>
+  </div>
+</div>

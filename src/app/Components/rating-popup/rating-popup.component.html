@@ -1,0 +1,61 @@
+<div
+  [@fadeInOut]
+  *ngIf="isShow"
+  style="
+    width: calc(100vw * 320 / 428);
+    height: calc(100vh * 300 / 844);
+    z-index: 1032;
+  "
+  class="bg-white fixed-bottom bg-white index-top pt-4-5 pb-4 position-center border-r-5 index-top d-flex flex-column justify-content-between"
+>
+  <div
+    class="position-absolute"
+    style="top: 1rem; right: 2rem"
+    (click)="toggleShow()"
+  >
+    <img src="assets/Images/close-default.png" alt="" />
+  </div>
+
+  <h1
+    class="fw-500 fz-16 align-items-center px-4-5 mt-3 text-center"
+    translate="msg.rating-popup-1"
+  ></h1>
+  <form [formGroup]="form" class="d-flex justify-content-center flex-column">
+    <ngx-star-rating
+      class="d-flex justify-content-center"
+      formControlName="rating"
+      [id]="'rating'"
+    ></ngx-star-rating>
+
+    <div class="px-4">
+      <input
+        type="text"
+        [id]="'comment'"
+        formControlName="comment"
+        [placeholder]="'msg.rating-popup-2' | translate"
+        class="my-2 flex-1 border-r-10 px-2 py-2 border-grey fz-14 justify-content-center w-100"
+      />
+    </div>
+  </form>
+  <div class="d-flex justify-content-center">
+    <button
+      (click)="submit()"
+      class="button button-yellow py-2 w-50 text-center fz-14 fw-500"
+      translate="COMMON.Send"
+    ></button>
+  </div>
+</div>
+
+<!-- *ngIf="isShow" -->
+<!-- (click)="toggleShowPayment()" -->
+<div
+  [@fadeInOut]
+  *ngIf="isShow"
+  style="
+    width: calc(100vw * 320 / 428);
+    height: calc(100vh * 258 / 926);
+    z-index: 1031;
+  "
+  (click)="toggleShow()"
+  class="bg-overlay-lighter position-fixed top-0 start-0 w-100 h-100 index-middle"
+></div>

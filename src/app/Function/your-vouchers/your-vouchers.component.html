@@ -1,0 +1,5 @@
+<app-header-back [title]="'COMMON.For-you' | translate" fz="20"></app-header-back>    
+
+<div class="mt-3 d-flex flex-column gap-3 container">
+    <app-your-voucher-item isHorizontal="false" *ngFor="let item of yourVouchers" [item]="item"></app-your-voucher-item>
+</div>

@@ -1,0 +1,230 @@
+<div [@fadeInOut]>
+  <app-header-back
+    [title]="'msg.Input-address-1' | translate"
+  ></app-header-back>
+
+  <div class="container">
+    <div *ngIf="!showMap" class="d-flex flex-column gap-4">
+      <div class="d-flex border-s-light py-2-5 px-3 border-r-10 gap-2 mb-4">
+        <label for="address" class="h-100"
+          ><img class="trans-y-10" src="assets/Images/search-grey.png" alt=""
+        /></label>
+        <input
+          type="text"
+          name="address"
+          id="address"
+          class="border-none flex-1 bg-transparent"
+          [placeholder]="'msg.Input-address-2' | translate"
+        />
+        <div
+          *ngIf="!showMap"
+          (click)="toggleShowMap()"
+          class="h-100"
+          id="google-map"
+        >
+          <img src="assets/Images/map-grey.png" alt="" />
+        </div>
+      </div>
+      <div class="d-flex flex-column gap-3 mb-4">
+        <div class="d-flex justify-content-between w-100">
+          <h5
+            class="fz-16 text-default-light fw-bold"
+            translate="msg.Input-address-3"
+          ></h5>
+          <h5 class="fz-16 text-red" translate="COMMON.Delete-all"></h5>
+        </div>
+
+        <div class="d-flex flex-column border-r-10 box-shadow w-100 px-3 py-3">
+          <div
+            *ngFor="let pastAddress of pastAddresses; let i = index"
+            [ngClass]="{
+              'border-s-bottom-light': i != pastAddresses.length - 1
+            }"
+            class="d-flex gap-2 align-items-center border-r-10 w-100 border-s-bottom-light py-3"
+          >
+            <div class="h-100 d-flex align-items-center">
+              <img
+                class="trans-y-10"
+                src="assets/Images/time-past.png"
+                alt=""
+              />
+            </div>
+
+            <div class="d-flex flex-column gap-1">
+              <h5 class="fz-16 text-default limit-line-1">
+                {{ pastAddress.address }}
+              </h5>
+              <h6 class="text-grey fz-14 limit-line-1">
+                {{ pastAddress.addressDetail }}
+              </h6>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="!showMap" class="d-flex flex-column gap-3">
+        <div class="d-flex justify-content-between w-100">
+          <h5
+            class="fz-16 text-default-light fw-bold"
+            translate="msg.Input-address-4"
+          ></h5>
+        </div>
+
+        <div
+          class="d-flex flex-column border-r-10 box-shadow-light w-100 px-4 py-3"
+        >
+          <div
+            (click)="toggleShowMap()"
+            class="d-flex gap-3 align-items-center pb-3 border-s-bottom-light"
+          >
+            <div class="h-100">
+              <img class="trans-y-10" src="assets/Images/home.png" alt="" />
+            </div>
+
+            <div class="d-flex flex-column gap-1">
+              <h5
+                class="fz-16 text-default limit-line-1"
+                translate="msg.Input-address-5"
+              ></h5>
+            </div>
+          </div>
+
+          <div
+            (click)="toggleShowMap()"
+            class="d-flex gap-3 align-items-center py-3 border-s-bottom-light"
+          >
+            <div class="h-100">
+              <img class="trans-y-10" src="assets/Images/building.png" alt="" />
+            </div>
+
+            <div class="d-flex flex-column gap-1">
+              <h5
+                class="fz-16 text-default limit-line-1"
+                translate="msg.Input-address-6"
+              ></h5>
+            </div>
+          </div>
+
+          <div
+            (click)="toggleShowMap()"
+            class="d-flex gap-3 align-items-center py-3"
+          >
+            <div class="h-100">
+              <img
+                class="trans-y-10"
+                src="assets/Images/plus-grey.png"
+                alt=""
+              />
+            </div>
+
+            <div class="d-flex flex-column gap-1">
+              <h5
+                class="fz-16 text-default limit-line-1"
+                translate="msg.Input-address-7"
+              ></h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      *ngIf="showMap"
+      class="position-relative d-flex flex-column justify-content-between align-items-center"
+    >
+      <div class="h-100">
+        <img src="assets/Images/map-exp.png" alt="" />
+      </div>
+
+      <div
+        [@BottomToTop]
+        *ngIf="showConfirmShipping"
+        id="past-search"
+        class="px-4 pt-4 border-top-xl bg-white position-fixed fixed-bottom"
+        style="padding-bottom: 100px; height: 40vh"
+      >
+        <h6 class="text-default-light fw-bold fz-16">
+          Xác nhận địa chỉ giao hàng
+        </h6>
+        <div
+          *ngFor="let pastAddress of pastAddresses; let i = index"
+          [ngClass]="{ 'border-s-bottom-light': i != pastAddresses.length - 1 }"
+          class="d-flex gap-3 align-items-center border-r-10 w-100 border-s-bottom-light py-3"
+        >
+          <div *ngIf="showConfirmShipping">
+            <div class="h-100 d-flex align-items-center">
+              <img
+                class="trans-y-10 sz-18"
+                style="width: 16px"
+                src="assets/Images/location-red.png"
+                alt=""
+              />
+            </div>
+
+            <div class="d-flex flex-column gap-1">
+              <h5 class="fz-16 text-default limit-line-1">
+                {{ pastAddress.address }}
+              </h5>
+              <h6 class="text-grey fz-14 limit-line-1">
+                {{ pastAddress.addressDetail }}
+              </h6>
+            </div>
+          </div>
+          <div
+            class="w-100 py-3 px-3 box-shadow position-absolute start-0 bg-white index-top bottom-0 px-4"
+          >
+            <div class="button button-yellow py-3 text-center">
+              Giao tới vị trí này
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        [@BottomToTop]
+        *ngIf="showInputAddress"
+        class="px-4 pt-4 border-top-xl bg-white position-fixed fixed-bottom"
+        style="padding-bottom: 100px; height: 40vh"
+      >
+        <div class="d-flex border-s-light py-2-5 px-3 border-r-10 gap-2 mb-4">
+          <label for="address" class="h-100"
+            ><img class="trans-y-10" src="assets/Images/search-grey.png" alt=""
+          /></label>
+          <input
+            type="text"
+            name="address"
+            id="address"
+            class="border-none flex-1"
+            [placeholder]="'msg.Input-address-2' | translate"
+          />
+        </div>
+        <div *ngIf="showInputAddress">
+          <div
+            *ngFor="let pastAddress of pastAddresses; let i = index"
+            [ngClass]="{
+              'border-s-bottom-light': i != pastAddresses.length - 1
+            }"
+            class="d-flex gap-3 align-items-center border-r-10 w-100 border-s-bottom-light py-3"
+          >
+            <div class="h-100 d-flex align-items-center">
+              <img
+                class="trans-y-50 sz-18"
+                style="width: 16px"
+                src="assets/Images/location-pin.png"
+                alt=""
+              />
+            </div>
+
+            <div class="d-flex flex-column gap-1">
+              <h5 class="fz-16 text-default limit-line-1">
+                {{ pastAddress.address }}
+              </h5>
+              <h6 class="text-grey fz-14 limit-line-1">
+                {{ pastAddress.addressDetail }}
+              </h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

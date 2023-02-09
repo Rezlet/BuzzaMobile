@@ -1,0 +1,65 @@
+<div [@fadeInOut]>
+  <app-header-back
+    [title]="'msg.History-payment-1' | translate"
+    showBooking="true"
+  ></app-header-back>
+
+  <div class="container">
+    <app-select-change
+      [items]="functions"
+      (newValue)="toggleBooking($event)"
+    ></app-select-change>
+    <div *ngIf="isBooking" class="">
+      <app-appointment-item
+        *ngFor="let item of booking"
+        [item]="item"
+      ></app-appointment-item>
+      <div
+        *ngIf="booking.length == 0"
+        class="d-flex flex-column align-items-center justify-content-center"
+      >
+        <div
+          [@fadeInOut]
+          class="h-100 w-100 d-flex justify-content-center mt-5 pt-5"
+        >
+          <img src="assets/Images/booking-now.png" alt="" />
+        </div>
+        <h6 class="fz-20 text-grey mt-4" translate="msg.History-payment-1"></h6>
+
+        <div
+          routerLink="/booking"
+          class="button button-yellow py-2 w-50 border-r-32 text-center mt-5"
+          translate="COMMON.Booking-now"
+        >
+         
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="!isBooking" class="">
+      <app-payment-item
+        *ngFor="let payment of payments"
+        [item]="payment"
+        (changed)="updateChanged($event)"
+      ></app-payment-item>
+      <div
+        [@fadeInOut]
+        *ngIf="payments.length == 0"
+        class="d-flex flex-column align-items-center justify-content-center"
+      >
+        <div class="h-100 w-100 d-flex justify-content-center mt-5 pt-5">
+          <img src="assets/Images/booking-now.png" alt="" />
+        </div>
+        <h6 class="fz-20 text-grey mt-4" translate="msg.History-payment-1"></h6>
+
+        <div
+          routerLink="/menu"
+          class="button button-yellow py-2 w-50 border-r-32 text-center mt-5"
+          translate="COMMON.Order-now"
+        >
+         
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

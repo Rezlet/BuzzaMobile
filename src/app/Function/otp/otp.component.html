@@ -1,0 +1,25 @@
+<app-header-back></app-header-back>
+<form
+  (ngSubmit)="onSubmit()"
+  [formGroup]="form"
+  class="container fle-wrap gap-3 d-flex flex-column gap-3"
+  style="min-height: 90vh; width: 100vw"
+>
+  <h1 class="fz-36 fw-500 text-default" translate="msg.Otp-1"></h1>
+  <h6 class="fz-12 text-grey mt-2" translate="msg.Otp-2"></h6>
+  <div class="d-flex gap-3 justify-content-center mt-3">
+    <ng-otp-input
+      (onInputChange)="handleOtpChange($event)"
+      [config]="config"
+      class="bg-transparent"
+    ></ng-otp-input>
+  </div>
+  <div *ngIf="errors" class="text-red">{{ errors }}</div>
+  <div class="flex-1 mt-5">
+    <button
+      type="submit"
+      class="button button-yellow w-100 text-center py-3 fw-500 fz-16 mb-5"
+      translate="COMMON.Continue"
+    ></button>
+  </div>
+</form>

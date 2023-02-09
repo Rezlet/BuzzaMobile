@@ -1,0 +1,263 @@
+<div [@fadeInOut]>
+  <app-header-back
+    [title]="mainBranch"
+    position="start"
+    showCart="true"
+    showLocation="true"
+  ></app-header-back>
+
+  <div class="mb-5">
+    <div class="container">
+      <app-select-change
+        [items]="listOptions"
+        (newValue)="getOption($event)"
+      ></app-select-change>
+    </div>
+    <!-- Menu Option -->
+    <div *ngIf="option == 'menu'" [@fadeInOut]>
+      <div class="d-flex gap-2">
+        <swiper [config]="configCategoriesMenu" class="my-swiper py-3">
+          <ng-template *ngFor="let item of listCategories" swiperSlide>
+            <div
+              (click)="selectCategoryFood(item.menuid)"
+              [ngClass]="{ 'bg-yellow': categoryFoodSelecting == item.menuid }"
+              class="px-3 py-4 border-r-10 bg-yellow box-shadow d-flex gap-2 align-items-center justify-content-center flex-wrap"
+            >
+              <div
+                class="h-100 w-100 circle-border d-flex justify-content-center"
+              >
+                <img
+                  [src]="item.menuimg_url"
+                  class="circle-border"
+                  style="height: 72px; width: 72px"
+                  alt=""
+                />
+              </div>
+
+              <h6 class="text-default fz-16 text-center capitalize">
+                {{ item.menuname.toLowerCase() }}
+              </h6>
+            </div>
+          </ng-template>
+        </swiper>
+      </div>
+      <!-- title -->
+      <div *ngIf="!isBuffet" class="mt-3 d-flex flex-column container">
+        <div class="d-flex justify-content-between">
+          <h6 class="text-default-light fz-16 fw-500" translate="COMMON.All"></h6>
+        </div>
+
+        <div
+          class="d-flex gap-c-2 gap-r-3 mt-3 flex-wrap justify-content-between"
+        >
+          <app-food-item
+            *ngFor="let item of items"
+            [item]="item"
+          ></app-food-item>
+        </div>
+      </div>
+
+      <div *ngIf="isBuffet" class="d-flex flex-column container">
+        <swiper [navigation]="true" [config]="configBanner" class="my-swiper">
+          <ng-template *ngFor="let item of listBanner" swiperSlide>
+            <div
+              class="px-3 py-4 border-r-10 d-flex gap-3 align-items-center flex-wrap"
+            >
+              <div class="h-100 w-100 d-flex justify-content-center">
+                <img [src]="item.src" alt="" />
+              </div>
+
+              <div class="mt-3 d-flex flex-column gap-2 px-4">
+                <h6 class="fz-30 text-orange fw-500">{{ item.title }}</h6>
+                <h5 class="text-default fz-24">{{ item.price }}/ người</h5>
+                <p class="text-default-light fz-14">{{ item.condition }}</p>
+              </div>
+            </div>
+          </ng-template>
+        </swiper>
+
+        <div class="px-20">
+          <h6 class="fw-bold fz-16 text-default">Bufet Thịt Nướng Trưa 99k</h6>
+
+          <div class="d-flex gap-3 mt-3 flex-wrap justify-content-center">
+            <diV
+              class="w-160 position-relative"
+              *ngFor="let item of listFoodBuffet"
+            >
+              <div class="flex-1 w-100 gap-3 box-shadow-light w-50 border-r-15">
+                <div class="h-100">
+                  <img class="w-100" [src]="item.src" [alt]="item.title" />
+                </div>
+                <div class="d-flex flex-column gap-2 p-3">
+                  <h6 class="text-grey fz-14">{{ item.title }}</h6>
+                </div>
+              </div>
+            </diV>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- News Option -->
+    <div *ngIf="option == 'news'" [@fadeInOut]>
+      <swiper [config]="configBannerNews" class="my-swiper py-4">
+        <ng-template *ngFor="let item of listBannerNews" swiperSlide>
+          <div
+            class="border-r-10 d-flex gap-3 align-items-center justify-content-center flex-wrap"
+          >
+            <div class="h-100 w-100">
+              <img class="w-100" [src]="item.src" alt="" />
+            </div>
+          </div>
+        </ng-template>
+      </swiper>
+
+      <div class="d-flex flex-column gap-3 container">
+        <div class="d-flex justify-content-between">
+          <h6 class="text-default-light fz-20 fw-bold" translate="COMMON.Good-deal"></h6>
+
+          <div routerLink="/nice-deal" class="d-flex gap-2 align-items-center">
+            <h6
+              class="fw-bold text-yellow fz-14"
+              translate="COMMON.WATCH-ALL"
+            ></h6>
+            <div class="h-100">
+              <img
+                src="assets/Images/angle-right-small-yerlow.png"
+                alt=""
+                class="trans-y-10"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex flex-column gap-3">
+          <app-deal-special
+            *ngFor="let item of listDeal"
+            [item]="item"
+            [brandName]="mainBranch"
+          ></app-deal-special>
+        </div>
+        <!-- Branch -->
+
+        <div class="d-flex flex-column gap-3 mt-2">
+          <div class="">
+            <h6 class="text-default-light fz-20 fw-bold" translate="COMMON.Branches"></h6>
+          </div>
+
+          <app-branch-item
+            [brandName]="mainBranch"
+            *ngFor="let item of branches"
+            [item]="item"
+          ></app-branch-item>
+        </div>
+      </div>
+
+      <div
+        *ngIf="!(listFlashSale.length == 0)"
+        class="d-flex flex-column gap-3 py-3 container mt-3"
+      >
+        <div class="d-flex justify-content-between">
+          <div class="d-flex gap-2">
+            <h6 class="text-default fz-20 fw-bold">Flash sale</h6>
+            <div class="">
+              <img class="sz-18" src="assets/Images/flash sale.png" alt="" />
+            </div>
+          </div>
+
+          <div routerLink="/flash-sale" class="d-flex gap-2 align-items-center">
+            <h6
+              class="text-yellow fz-14 fw-bold"
+              translate="COMMON.WATCH-ALL"
+            ></h6>
+            <div class="h-100">
+              <img
+                class="trans-y-10"
+                src="assets/Images/angle-right-small-yerlow.png"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex gap-2 flex-wrap justify-content-center container">
+        <app-food-item
+          *ngFor="let item of listFlashSale"
+          [item]="item"
+          [brandName]="mainBranch"
+        ></app-food-item>
+      </div>
+    </div>
+
+    <!-- Voucher Option -->
+    <div class="" *ngIf="option == 'voucher'" [@fadeInOut]>
+      <div class="d-flex flex-column container">
+        <div class="">
+          <div
+            class="bg-yellow-light border-r-32 w-100 d-flex py-3 flex-column bg-yellow-light align-items-center mt-4"
+          >
+            <h6 class="text-yellow fz-14" translate="msg.Your-Total-Point"></h6>
+
+            <h5 class="text-yellow fz-36 fw-500">{{ scoreUser }}</h5>
+          </div>
+        </div>
+
+        <div *ngIf="listVouchers.length != 0" class="">
+          <h4 class="py-3 mt-3 text-default-light fz-20 fw-bold" translate="COMMON.Your-vouchers">
+          </h4>
+
+          <div class="d-flex flex-column gap-3 mt-2">
+            <app-change-point-item
+              *ngFor="let item of listVouchers"
+              [item]="item"
+            ></app-change-point-item>
+          </div>
+        </div>
+
+        <div class="d-flex flex-column py-3 mt-3">
+          <div class="d-flex justify-content-between">
+            <h6 class="text-default-light fz-16 fw-500" translate="COMMON.Highlights"></h6>
+          </div>
+
+          <div class="h-100 mt-2">
+            <img
+              class="w-100"
+              src="assets/Images/outstanding-exp-2.png"
+              alt=""
+            />
+          </div>
+        </div>
+
+        <div class="d-flex flex-column py-3 mt-3">
+          <div class="d-flex justify-content-between">
+            <h6 class="text-default-light fz-16 fw-500" translate="COMMON.For-you"></h6>
+
+            <div
+              routerLink="/your-vouchers"
+              class="d-flex gap-2 align-items-center"
+            >
+              <h6
+                class="fw-bold text-yellow fz-14"
+                translate="COMMON.WATCH-ALL"
+              ></h6>
+              <div class="h-100">
+                <img
+                  src="assets/Images/angle-right-small-yerlow.png"
+                  alt=""
+                  class="trans-y-10"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row row-cols-2 mt-2">
+            <app-your-voucher-item
+              *ngFor="let item of yourVouchers"
+              [isHorizontal]="false"
+              [item]="item"
+            ></app-your-voucher-item>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

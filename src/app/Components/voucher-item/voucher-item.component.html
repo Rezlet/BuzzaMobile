@@ -1,0 +1,83 @@
+<div
+  *ngIf="!showQR"
+  class="border-r-10 position-relative gap-5 shadow-voucher my-2 p-3 d-flex hover-to-border-yellow"
+>
+  <div class="h-100 ticket-voucher">
+    <div class="cut-top"></div>
+    <img
+      (click)="toggleShowQR()"
+      [src]="'assets/Images/voucher-exp-2.png'"
+      style="height: 100px; width: 100px"
+      [ngClass]="{
+        'filter-grey': !item.using
+      }"
+      alt=""
+    />
+    <div class="cut-bottom"></div>
+  </div>
+
+  <div class="d-flex flex-column justify-content-between">
+    <div class="d-flex flex-column gap-1">
+      <div class="fz-16 fw-500 text-default-light pr-5 limit-line-2">
+        {{ item.GiftCardType_Name }}
+      </div>
+      <div class="fz-14 text-grey">{{ item.condition }}</div>
+    </div>
+
+    <div
+      class="fz-16 text-grey justify-self-end"
+      [ngClass]="{
+        'text-danger': item.status == 'danger',
+        'text-warning': item.status == 'warning',
+        'text-grey': item.status == 'good'
+      }"
+    >
+      {{ item.PromoCard_EndDate }}
+    </div>
+
+    <div
+      *ngIf="isSelected"
+      class="fz-16 text-grey justify-self-end text-warning"
+    >
+      Bỏ chọn
+    </div>
+  </div>
+
+  <div (click)="toggleShowQR()" class="justify-content-between icon-top-right">
+    <img src="assets/Images/info-circle-grey.png" alt="" />
+  </div>
+  <div class="voucher"></div>
+
+  <!-- POPUP QR -->
+</div>
+
+<div
+  *ngIf="showQR"
+  class="fixed-top popup-content bg-white d-flex flex-column justify-content-around p-5 text-center"
+>
+  <div class="pos-close-button">
+    <div class="h-100">
+      <img
+        src="assets/Images/close-default.svg"
+        (click)="toggleShowQR()"
+        alt=""
+      />
+    </div>
+  </div>
+  <div class="d-flex flex-column gap-4 align-items-center">
+    <h5 class="fz-24 fw-500 text-default">{{ item.titleEvent }}</h5>
+    <h6 class="fz-16 text-default-light p-1 lh-24">
+      {{ item.condition }}
+    </h6>
+  </div>
+  <div class="d-flex justify-content-center flex-column gap-3 trans-y-10">
+    <div class="h-100">
+      <img src="assets/Images/qr-exp.png" alt="" />
+    </div>
+
+    <h6 class="fz-16 text-center text-grey">{{ item.dayOfDate }}</h6>
+
+    <h6 class="fz-16 text-warning">{{ item.qrCode }}</h6>
+  </div>
+  <div class=""></div>
+</div>

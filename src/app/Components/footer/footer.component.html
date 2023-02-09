@@ -1,0 +1,123 @@
+<div class="footer-content fixed-bottom container" style="bottom: -2px">
+  <div
+    [ngClass]="{ 'current-standing': isCheck == 'home' }"
+    class="flex-1 footer-home"
+    routerLink=""
+  >
+    <div class="h-100">
+      <img src="../../../assets/Images/home.svg" alt="" />
+    </div>
+    <span translate="COMMON.HOME"></span>
+  </div>
+  <div
+    [ngClass]="{ 'current-standing': isCheck == 'order' }"
+    class="flex-1 footer-order"
+    routerLink="/order"
+  >
+    <div class="h-100">
+      <img src="../../../assets/Images/order.svg" alt="" />
+    </div>
+    <span translate="COMMON.ORDER"></span>
+  </div>
+
+  <div class="flex-1 d-flex justify-content-center">
+    <div
+      class="bg-black sz-64 circle-border"
+      style="transform: translateY(-17.5%)"
+      (click)="openQrScanner(action)"
+    >
+      <div class="h-100 d-flex justify-content-center align-items-center">
+        <img src="assets/Images/scan-qr.svg" alt="" />
+      </div>
+    </div>
+  </div>
+
+  <div
+    [ngClass]="{ 'current-standing': isCheck == 'noti' }"
+    class="flex-1 footer-order position-relative"
+    routerLink="/notifications"
+  >
+    <div class="h-100 position-relative">
+      <img src="../../../assets/Images/bell.svg" alt="" />
+      <div
+        *ngIf="numberUnread"
+        style="top: -4px; right: -8px"
+        class="position-absolute bg-red fz-14 fw-400 circle-border text-white sz-18 d-flex align-items-center justify-content-center"
+      >
+        {{ numberUnread }}
+      </div>
+    </div>
+    <span translate="COMMON.NOTIFICATIONS"></span>
+  </div>
+
+  <div
+    [ngClass]="{ 'current-standing': isCheck == 'profile' }"
+    routerLink="/profile"
+    class="flex-1 footer-right-menu"
+  >
+    <div class="h-100">
+      <img src="../../../assets/Images/menu-right.svg" alt="" />
+    </div>
+    <span translate="COMMON.OTHER"></span>
+  </div>
+</div>
+
+<div
+  style="height: 100vh; width: 100vw"
+  class="position-fixed top-0 start-0"
+  [ngClass]="{
+    'opacity-1,  index-top': action.isStart,
+    'd-none index-middle': !action.isStart
+  }"
+>
+  <ngx-scanner-qrcode
+    #action="scanner"
+    (data)="output = $event"
+  ></ngx-scanner-qrcode>
+
+  <div
+    (click)="close()"
+    style="transform: translate(10px, 10px)"
+    class="cursor-poiter sz-circle-40 position-fixed index-middle top-0 d-flex align-items-center justify-content-center circle-border bg-overlay-light"
+  >
+    <img
+      class="circle-border"
+      src="assets/Images/arrow-left-white.png"
+      alt=""
+    />
+  </div>
+
+  <div
+    style="transform: translate(-10px, 10px)"
+    class="cursor-poiter sz-circle-40 position-fixed index-middle top-0 d-flex end-0 align-items-center justify-content-center circle-border bg-overlay-light"
+  >
+    <img
+      class="circle-border sz-circle-28"
+      style="
+        filter: brightness(0) saturate(100%) invert(84%) sepia(98%) saturate(2%)
+          hue-rotate(223deg) brightness(107%) contrast(100%);
+      "
+      src="assets/Images/swap.svg"
+      alt=""
+    />
+  </div>
+</div>
+
+<app-rating-popup
+  [isShow]="success"
+  (emitShow)="catchEvent($event)"
+  [resTicketId]="resTicketID"
+></app-rating-popup>
+
+<div
+  [@fadeInOut]
+  *ngIf="showError"
+  class="bg-red button button-grey position-fixed w-50 py-2 bottom-25 position-center text-white"
+  style="top: 80%; background-color: #fff !important; z-index: 1035"
+>
+  <h1
+    style="z-index: 1031"
+    class="text-default fz-16 text-center"
+    translate="err.footer-1"
+  ></h1>
+</div>

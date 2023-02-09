@@ -1,0 +1,45 @@
+<div [@fadeInOut] class="container pb-5">
+  <div class="fz-20 fw-bold header" translate="COMMON.NOTIFICATIONS"></div>
+
+  <div class="d-flex flex-column">
+    <div class="d-flex justify-content-end mb-3"
+    (click)="markAll()">
+      <a class="text-yellow fz-12" translate="COMMON.SEE-ALL"></a>
+    </div>
+
+    <div
+    class="pt-3 new-notification-item position-relative pb-2"
+    [ngClass]="{ 'new-notification-background': !(notification.LastSeen) }"
+    (click)="readNoti(notification.Id)"
+    *ngFor="let notification of notifications"
+      >
+      <div class="index-bottom d-flex gap-2 align-items-center position-relative">
+        <div class="h-100">
+          <img style="width: 68px; height: 68px;" [src]="notification.ImgUrl" alt="" />
+        </div>
+
+        <div class="d-flex flex-column gap-1">
+          <h5 class="fw-bold fz-16" [innerHTML]="notification.Title"></h5>
+          <h6 class="fz-14 text-grey" [innerHTML]="notification.Content">
+            
+          </h6>
+
+          {{notification.Id}}
+        </div>
+
+        <div class="align-self-start">
+          <div
+            class="text-grey fz-14"
+            [ngClass]="{
+              'new-notification': notification.status,
+              'position-relative': notification.status
+            }"
+          >
+            {{ notification.date }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-footer isCheck="noti"></app-footer>
+</div>

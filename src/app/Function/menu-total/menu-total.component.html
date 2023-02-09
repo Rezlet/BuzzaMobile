@@ -1,0 +1,48 @@
+<div [@fadeInOut]>
+  <app-header-back [title]="'COMMON.Menu' | translate" showCart="true"></app-header-back>
+
+  <div class="container">
+    <app-select-change
+      [items]="brands"
+      (newValue)="getValueItems($event)"
+    ></app-select-change>
+
+    <div class="d-flex gap-2">
+      <swiper [config]="configCategoriesMenu" class="my-swiper py-3">
+        <ng-template *ngFor="let item of listCategories" swiperSlide>
+          <div
+            (click)="getFoodItem(this.currentBrand.bid, item.menuid)"
+            [ngClass]="{ 'bg-yellow': currentMenuID == item.menuid }"
+            class="px-3 py-4 border-r-10 bg-yellow box-shadow d-flex gap-2 align-items-center justify-content-center flex-wrap"
+          >
+            <div
+              class="h-100 w-100 circle-border d-flex justify-content-center"
+            >
+              <img
+                [src]="item.menuimg_url"
+                class="circle-border"
+                style="height: 72px; width: 72px"
+                alt=""
+              />
+            </div>
+
+            <h6 class="text-default fz-16 text-center capitalize">
+              {{ item.menuname.toLowerCase() }}
+            </h6>
+          </div>
+        </ng-template>
+      </swiper>
+    </div>
+
+    <div class="mt-3 d-flex flex-column">
+      <div class="d-flex justify-content-between">
+        <h6 class="text-default-light fz-16 fw-500" translate="COMMON.All"></h6>
+      </div>
+      <div
+        class="d-flex gap-c-2 gap-r-3 mt-3 flex-wrap justify-content-between"
+      >
+        <app-food-item [brandName]="currentBrand"  *ngFor="let item of items" [item]="item" ></app-food-item>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<div
+  class="m-auto"
+  [ngClass]="{ 'w-100': items.length == 3, 'w-66': items.length == 2 }"
+>
+  <div
+    class="d-flex justify-content-between align-items-center border-right-xl border-left-xl box-shadow w-100 position-relative"
+  >
+    <div
+      class="text-grey fz-12 border-right-xl border-left-xl cursor-poiter flex-1 py-2 text-center index-bottom fz-14"
+      *ngFor="let item of items; let i = index"
+      [attr.data-index]="i"
+      [ngClass]="{ 'active-select-change': i == selecting }"
+      (click)="changeSelecting(i)"
+      (click)="getNewValue(item)"
+    >
+      <div class="fw-bold animation capitalize">{{ item.title?.toLowerCase() }}</div>
+    </div>
+    <div
+      class="animation h-100 border-left-xl border-right-xl position-absolute bg-black"
+      [style.left]="ratio * selecting + '%'"
+      [ngClass]="'w-' + ratio.toFixed()"
+    ></div>
+  </div>
+</div>

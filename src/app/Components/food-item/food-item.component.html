@@ -1,0 +1,68 @@
+<div class="position-relative" [@fadeInOut]>
+  <div
+    style="top: 20px; right: 20px; width: 28px; height: 28px"
+    class="position-absolute"
+    (click)="favoriteFood()"
+  >
+    <div class="bg-heart circle-border w-100 h-100"></div>
+    <img
+      [src]="
+        isLike
+          ? 'assets/Images/heart-red.svg'
+          : 'assets/Images/heart-linear.svg'
+      "
+      alt=""
+      class="w-50 h-50 position-center position-absolute"
+    />
+  </div>
+
+  <div
+    class="flex-1 gap-3 box-shadow-light border-r-15 bg-white food-item-resolution"
+    style="max-width: 200px"
+  >
+    <div class="h-100">
+      <img
+        class="w-100 border-top-8"
+        [src]="item.itemimg_url"
+        style="height: 124px"
+        (click)="toggleShowFoodItem()"
+        [alt]="item.title"
+      />
+    </div>
+
+    <div class="d-flex flex-column gap-2 p-3">
+      <h6 class="text-grey fz-14 capitalize">
+        {{ item.brand || brandName }}
+      </h6>
+      <h5 class="text-default-light fz-16 fw-bold limit-line-1">
+        {{ item.itemname }}
+      </h5>
+      <div class="d-flex justify-content-between w-100 align-items-center">
+        <div class="d-flex gap-2">
+          <h5 class="fz-14 fw-400 text-yellow fw-bold">
+            {{ item.itemprice | currencyVN }}
+          </h5>
+          <!-- <h6 class="line-through fz-12 text-grey">{{ item.price }}đ</h6> -->
+        </div>
+        <button
+          (click)="toggleShowFoodItem()"
+          class="circle-border bg-yellow text-white sz-circle-24 d-flex justify-content-center align-items-center fz-16 trans-y-10 border-none"
+        >
+          <img
+            src="assets/Images/plus.png"
+            alt=""
+            class="h-50 d-flex justify-content-between align-items-center"
+          />
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-order-layout
+  [item]="item"
+  [setMenu1]="set1"
+  [setMenu2]="set2"
+  [showFoodItem]="showFoodItem"
+  (emitShow)="getStatusShow($event)"
+></app-order-layout>

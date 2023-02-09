@@ -1,0 +1,77 @@
+<div
+  *ngIf="isBooking"
+  [routerLink]="'/detail-booking/' + brandID + '/' + item.bid"
+  class="box-shadow d-flex gap-4 border-r-10 bg-white align-items-center"
+  [@fadeInOut]
+  style="padding: 12px"
+>
+  <div class="h-100">
+    <img
+      class="obj-fit-cover border-r-10"
+      style="height: 100px; width: 100px"
+      [src]="item.bimg_url"
+      alt=""
+    />
+  </div>
+
+  <div class="d-flex flex-column justify-content-between">
+    <div class="d-flex justify-content-between">
+      <div class="d-flex flex-column gap-1">
+        <h6 class="fz-14 text-grey fw-bold capitalize">{{ brandName }}</h6>
+        <div class="d-flex align-items-center justify-content-between gap-3">
+          <h5 class="fz-16 fw-500 text-default limit-line-1 mb-2">
+            {{ item.bname }}
+          </h5>
+        </div>
+      </div>
+      <!-- <div class="h-100">
+        <img
+          src="assets/Images/angle-right-small.png"
+          alt=""
+          class="trans-y-10"
+        />
+      </div> -->
+    </div>
+
+    <div class="fz-12 text-default-light fw-400 limit-line-2">
+      {{ item.badd }}
+    </div>
+  </div>
+</div>
+
+<!-- sang trang brand-home -->
+<div
+  *ngIf="!isBooking"
+  [routerLink]="'/brand-home/' + brandID + '/' + item.bid"
+  class="box-shadow p-2 d-flex gap-4 border-r-10"
+  [@fadeInOut]
+>
+  <div class="h-100">
+    <img
+      class="obj-fit-cover border-r-15"
+      style="height: 100px; width: 100px"
+      [src]="item.bimg_url"
+      alt=""
+    />
+  </div>
+
+  <div class="d-flex flex-column justify-content-between">
+    <div class="d-flex flex-column gap-2">
+      <h6 class="fz-12 text-grey fw-bold capitalize">{{ brandName }}</h6>
+      <div class="d-flex align-items-center justify-content-between gap-3">
+        <h5 class="fz-16 fw-500 text-default">{{ item.bname }}</h5>
+        <!-- <div class="h-100">
+          <img
+            src="assets/Images/angle-right-small.png"
+            alt=""
+            class="trans-y-10"
+          />
+        </div> -->
+      </div>
+    </div>
+
+    <div class="fz-12 text-default-light fw-400">
+      {{ item.badd }}
+    </div>
+  </div>
+</div>

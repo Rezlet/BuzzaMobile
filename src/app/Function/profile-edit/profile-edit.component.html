@@ -1,0 +1,187 @@
+<div [@fadeInOut]>
+  <app-header-back
+    [title]="'PROFILE.INFORMATION' | translate"
+  ></app-header-back>
+
+  <div class="container">
+    <form
+      #userInfo="ngForm"
+      (ngSubmit)="onSubmit(userInfo.value)"
+      class="d-flex flex-column justify-content-between"
+      style="gap: 24px"
+    >
+      <div class="d-flex justify-content-center">
+        <div class="h-100 position-relative">
+          <img
+            class="circle-border"
+            style="width: 155px; height: 155px"
+            alt=""
+            [src]="
+              profileInfo.ProfilePicture
+                ? profileInfo.ProfilePicture
+                : 'assets/Images/user-default.svg'
+            "
+          />
+          <!-- [src]="
+              profileInfo
+                ? profileInfo.ProfilePicture
+                : 'assets/Images/user-default.svg'
+            " -->
+
+          <div
+            class="position-absolute bottom-0 end-0 sz-circle-32 bg-white circle-border d-flex justify-content-center align-items-center"
+          >
+            <img src="assets/Images/camera-solid.svg" alt="" />
+
+            <input
+              type="file"
+              name="ProfilePicture"
+              id="ProfilePicture"
+              ngModel
+              class="position-absolute opacity-0 sz-circle-32 start-0"
+              (change)="onFileChange($event)"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="d-flex column gap-1 position-relative can-edit">
+        <label
+          class="d-flex align-items-center fz-14 text-grey label-on-input"
+          for="name"
+          translate="COMMON.NAME"
+        ></label>
+        <input
+          type="text"
+          class="border-none border-bottom py-3 pe-3 flex-1 disable-focus bg-transparent"
+          name="name"
+          id="name"
+          [ngModel]="profileInfo ? profileInfo.Username : ''"
+        />
+      </div>
+
+      <div class="d-flex column gap-1 position-relative can-edit">
+        <label
+          class="d-flex align-items-center fz-14 text-grey label-on-input"
+          for="numberphone"
+          translate="COMMON.NUMBER-PHONE"
+        ></label>
+        <input
+          type="number"
+          class="border-none border-bottom py-3 pe-3 flex-1 disable-focus bg-transparent"
+          name="numberphone"
+          id="numberphone"
+          [ngModel]="profileInfo ? profileInfo.PhoneNumber : ''"
+        />
+      </div>
+
+      <div class="d-flex column gap-1 position-relative can-edit">
+        <label
+          class="d-flex align-items-center fz-14 text-grey label-on-input"
+          for="gmail"
+          translate="COMMON.EMAIL-ADDRESS"
+        ></label>
+        <input
+          ngModel
+          type="email"
+          class="border-none border-bottom py-3 pe-3 flex-1 disable-focus bg-transparent"
+          name="gmail"
+          id="gmail"
+          [ngModel]="profileInfo ? profileInfo.Email : ''"
+        />
+      </div>
+
+      <div class="d-flex flex-column gap-1 position-relative border-bottom">
+        <label
+          class="d-flex align-items-center fz-14 text-grey label-on-input"
+          for="sex"
+          translate="COMMON.SEX"
+        ></label>
+        <div class="d-flex gap-3 py-3 pe-3">
+          <div class="d-flex gap-2">
+            <input
+              type="radio"
+              name="gender"
+              id="gender"
+              [value]="1"
+              [ngModel]="profileInfo ? profileInfo.Gender : ''"
+            />
+            <label for="1" translate="COMMON.MALE"></label>
+          </div>
+
+          <div class="d-flex gap-2">
+            <input
+              type="radio"
+              name="gender"
+              id="gender"
+              [value]="0"
+              [ngModel]="profileInfo ? profileInfo.Gender : ''"
+            />
+            <label for="0" translate="COMMON.FEMALE"></label>
+          </div>
+
+          <div class="d-flex gap-2">
+            <input
+              type="radio"
+              name="gender"
+              id="gender"
+              [value]="2"
+              [ngModel]="profileInfo ? profileInfo.Gender : ''"
+            />
+            <label for="2" translate="COMMON.OTHER"></label>
+          </div>
+
+          <!-- <input
+            type="hidden"
+            name="Address"
+            id="Address"
+            [ngModel]="profileInfo ? profileInfo.Address : ''"
+          /> -->
+        </div>
+      </div>
+
+      <div class="d-flex column gap-1 position-relative">
+        <label
+          class="d-flex align-items-center fz-14 text-grey label-on-input"
+          for="date"
+          translate="COMMON.DATE-OF-BIRTH"
+        ></label>
+        <input
+          ngModel
+          type="date"
+          class="border-none border-bottom py-3 pe-3 flex-1 disable-focus bg-transparent"
+          name="date"
+          id="date"
+          placeholder="DD/MM/YYYY"
+          style="text-transform: uppercase"
+          [ngModel]="profileInfo.DateOfBirth | date : 'yyyy-MM-dd'"
+          *ngIf="profileInfo"
+        />
+
+        <input
+          ngModel
+          type="date"
+          class="border-none border-bottom py-3 pe-3 flex-1 disable-focus bg-transparent text-grey"
+          name="date"
+          id="date"
+          placeholder="DD/MM/YYYY"
+          style="text-transform: uppercase"
+          *ngIf="!profileInfo"
+        />
+      </div>
+
+      <div
+        *ngIf="isSuccess"
+        class="text-success fz-14"
+        translate="success.profile-edit"
+      ></div>
+
+      <div *ngIf="messages" class="text-red fz-14">
+        {{ messages }}
+      </div>
+      <button
+        class="w-100 button button-yellow pt-3 pb-3 fw-bold fz-16 mt-5"
+        translate="COMMON.SAVE-CHANGES"
+      ></button>
+    </form>
+  </div>
+</div>

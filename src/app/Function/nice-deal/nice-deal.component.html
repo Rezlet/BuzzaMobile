@@ -1,0 +1,11 @@
+<div [@fadeInOut]>
+  <app-header-back [title]="'COMMON.Good-deal' | translate"></app-header-back>
+  
+  <div [@fadeInOut] class="d-flex flex-column gap-3 mt-4 container mb-4">
+    <app-deal-special
+      *ngFor="let item of listDeal"
+      [item]="item"
+    ></app-deal-special>
+  </div>
+
+</div>

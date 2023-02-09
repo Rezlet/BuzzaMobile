@@ -1,0 +1,9 @@
+<div [@fadeInOut]>
+    <app-header-back [title]="title" showCart="true" fz="20"></app-header-back>
+    
+    
+    <div class="d-flex flex-column gap-3 mt-4 container">
+        <app-food-item-special *ngFor="let item of listFavourites" [item]="item"></app-food-item-special>
+     </div>
+
+</div>

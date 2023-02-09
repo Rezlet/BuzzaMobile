@@ -1,0 +1,15 @@
+<div [@fadeInOut]>
+  <app-header-back [title]="'COMMON.Select-Restaurant' | translate"></app-header-back>
+
+  <div class="container-mobile">
+    <div class="d-flex flex-column gap-3">
+      <app-restaurant-item
+        *ngFor="let item of items"
+        [item]="item"
+        [brandID]="brandID"
+        [isBooking]="false"
+        [brandName]="brandName"
+        ></app-restaurant-item>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<div [@fadeInOut] *ngIf="show">
+  <div
+    class="bg-overlay-light fixed-top w-100 h-100"
+    (click)="toggleShow()"
+  ></div>
+
+  <div
+    *ngIf="isBooking"
+    class="position-fixed bg-white index-top w-90 start-10 top-25 border-r-15 px-20 py-4"
+    style="top: 25%; left: 5%; width: 90%"
+  >
+    <h1 class="fw-500 fz-24 text-center text-default p-4">
+      {{ title }}
+    </h1>
+    <h5 class="fz-14 text-grey text-center fw-light" translate="msg.success-layout-1">
+    
+    </h5>
+    <div class="d-flex justify-content-center py-3">
+      <img src="assets/Images/success-booking.png" alt="" />
+    </div>
+
+    <div class="d-flex gap-2 justify-content-center mt-4">
+      <button
+        class="button button-grey py-2 px-4"
+        routerLink="/history-payment"
+        translate="msg.success-layout-2"
+      >
+      
+      </button>
+      <button routerLink="/" class="button button-yellow py-2 px-4" (click)="toggleShow()" translate="COMMON.Continue">
+     
+      </button>
+    </div>
+
+    <h6 class="fz-12 text-default-light text-center mt-3" [innerHTML]="'msg.success-layout-3' | translate">
+    
+    </h6>
+  </div>
+</div>
